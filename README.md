@@ -1,4 +1,4 @@
-dissertation
+Dissertation
 ============
 
-Versioning for my Dissertation
+Versioning for my dissertation
