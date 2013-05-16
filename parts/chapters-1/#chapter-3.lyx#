@@ -1,0 +1,924 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass utthesis
+\options dissertation,letterpaper,12pt
+\use_default_options true
+\master ../Dissertation.lyx
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+VAR Models Under Gaussian Errors
+\end_layout
+
+\begin_layout Section
+VAR Basics
+\end_layout
+
+\begin_layout Standard
+Classically this is the error distribution associated with VAR as well as
+ most other regression type models, at least initially.
+\begin_inset space \space{}
+\end_inset
+
+For that reason, the discussion here also commences in such a manner.
+ Consider again the initial formulation of the VAR
+\begin_inset Formula 
+\begin{equation}
+\mathbf{y}_{t}=\Gamma D+\sum_{i=1}^{p}\Phi_{i}\mathbf{y}_{t-i}+\varepsilon_{t}.\label{VAR (Basic)}
+\end{equation}
+
+\end_inset
+
+Now the following definitions are made, as given by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Luetk:1993"
+
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{equation}
+\begin{array}{ll}
+\mathbf{Y}\,=\left(\mathbf{y}_{1},\mathbf{y}_{2},\ldots,\mathbf{y}_{n}\right)^{\prime} & \left(n\times k\right)\\
+\mathbf{x}_{t}=\left(D,\mathbf{y}_{t-1}^{\prime},\mathbf{y}_{t-2}^{\prime},\ldots,\mathbf{y}_{t-p}^{\prime}\right)^{\prime} & (q\times1)\\
+\mathbf{X}\,=\left(\mathbf{x}_{1},\mathbf{x}_{2},\ldots,\mathbf{x}_{n}\right)^{\prime} & \left(n\times q\right)\\
+\mathbf{B}\,=\left(\Gamma,\Phi_{1},\ldots,\Phi_{p}\right)^{\prime} & \left(q\times k\right)\\
+\mathbf{E}\,=\left(\varepsilon_{1},\varepsilon_{2},\ldots,\varepsilon_{n}\right)^{\prime} & \left(n\times k\right),
+\end{array}\label{MV Nomenclature}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $q=kp+d$
+\end_inset
+
+, and 
+\begin_inset Formula $d\geq0$
+\end_inset
+
+ depends on what deterministic or intercept terms are included.
+ The definitions in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "MV Nomenclature"
+
+\end_inset
+
+ allow for a simplified representation of the VAR model given by
+\begin_inset Formula 
+\begin{equation}
+\mathbf{Y}=\mathbf{XB}+\mathbf{E.}\label{VAR (Matrix)}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "VAR (Matrix)"
+
+\end_inset
+
+ corresponds to the saturated VAR model, however the interest here is in
+ subset VAR
+\begin_inset space \space{}
+\end_inset
+
+models.
+ Following the definitions in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Luetk:1993"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "VAR (Matrix)"
+
+\end_inset
+
+ can be rewritten in vectorized form as
+\begin_inset Formula 
+\begin{equation}
+\mathbf{y}=\mathbf{x\beta}+\mathbf{\varepsilon},\label{VAR (Vec)}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{y}=vec\left(\mathbf{Y}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(nk\times1\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{x}=\mathbf{I}_{k}\otimes\mathbf{X}$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(nk\times kq\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbf{\beta}=vec\left(\mathbf{B}\right)$
+\end_inset
+
+ is 
+\begin_inset Formula $\left(kq\times1\right)$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{\varepsilon}=vec\left(\mathbf{E}\right)$
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+is 
+\begin_inset Formula $\left(nk\times1\right)$
+\end_inset
+
+.
+ A modification can now be applied to 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "VAR (Vec)"
+
+\end_inset
+
+ in order to impose linear, specifically zero, constraints that will lead
+ to a subset VAR model, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Chap.~5.2"
+key "Luetk:1993"
+
+\end_inset
+
+.
+ Specifically 
+\begin_inset Formula $\mathbf{\beta}$
+\end_inset
+
+ is constrained such that
+\begin_inset Formula 
+\begin{equation}
+\mathbf{\beta}=\mathbf{R\gamma},\label{Constrained Beta}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{R}$
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+is the 
+\begin_inset Formula $\left(kq\times l\right)$
+\end_inset
+
+ matrix through which the zero constraints are imposed, and 
+\begin_inset Formula $l$
+\end_inset
+
+ is the number of unconstrained elements of 
+\begin_inset Formula $\mathbf{\beta}$
+\end_inset
+
+.
+ This leads to the final form of the subset VAR
+\begin_inset Formula 
+\begin{equation}
+\mathbf{y}=\mathbf{x}^{\ast}\mathbf{\gamma}+\mathbf{\varepsilon},\label{Subset VAR (Vec)}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{x}^{\ast}=\mathbf{xR}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Maximum Likelihood (ML) Estimation
+\end_layout
+
+\begin_layout Standard
+Here it is assumed that the errors are normally distributed, that is
+\begin_inset Formula 
+\[
+\mathbf{\varepsilon}\thicksim N_{nk}\left(\mathbf{0},\Omega\right),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\Omega=\Sigma\otimes\mathbf{I}_{n}$
+\end_inset
+
+.
+ Therefore, the probability density function (pdf) of 
+\begin_inset Formula $\mathbf{\varepsilon}$
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+is
+\begin_inset Formula 
+\begin{eqnarray}
+f\left(\mathbf{\varepsilon}\right) & = & \frac{1}{\left(2\pi\right)^{nk/2}\left\vert \Omega\right\vert ^{1/2}}\exp\left[-\frac{1}{2}\mathbf{\varepsilon}^{\prime}\Omega^{-1}\mathbf{\varepsilon}\right]\\
+ & = & \frac{1}{\left(2\pi\right)^{nk/2}\left\vert \Omega\right\vert ^{1/2}}\exp\left[-\frac{1}{2}\left(\mathbf{y}-\mathbf{x}^{\ast}\mathbf{\gamma}\right)^{\prime}\Omega^{-1}\left(\mathbf{y}-\mathbf{x}^{\ast}\mathbf{\gamma}\right)\right].\label{MVN pdf}
+\end{eqnarray}
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%TCIMACRO{%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%
+\backslash
+TeXButton{cite: [Chap.~5.2]{Luetk:1993}}{
+\backslash
+citet[Chap.~5.2]{Luetk:1993}} }%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%BeginExpansion
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand citet
+after "Chap.~5.2"
+key "Luetk:1993"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%EndExpansion
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+shows that under the assumption of normality, the ML estimates are equivalent
+ to the generalized least squares (GLS) estimates.
+ These in turn are estimated by the two-stage feasible generalized least
+ squares (FGLS), namely
+\begin_inset Formula 
+\begin{equation}
+\widetilde{\mathbf{\gamma}}=\left(\mathbf{x}^{\ast\prime}\widehat{\Omega}\,^{-1}\mathbf{x}^{\ast}\right)^{-1}\mathbf{x}^{\ast\prime}\widehat{\Omega}\,^{-1}\mathbf{y}\label{2S-FGLS Regression Parameters(Gaussian)}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\widehat{\Omega}\,=\widehat{\Sigma}\otimes\mathbf{I}_{n}$
+\end_inset
+
+, and the estimator 
+\begin_inset Formula $\widehat{\Sigma}$
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+is obtained from the least squares (LS) residuals from the saturated or
+ the subset model, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hamil:1994"
+
+\end_inset
+
+.
+ The variance can then be estimated as
+\begin_inset Formula 
+\begin{equation}
+\widetilde{\Sigma}=\frac{\widetilde{\mathbf{E}}^{\prime}\widetilde{\mathbf{E}}}{n},\label{2S-FGLS Variance (Gaussian)}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\widetilde{\mathbf{E}}$
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+is the FGLS error matrix formed by reshaping
+\begin_inset Formula 
+\[
+\widetilde{\mathbf{e}}=\mathbf{y}-\mathbf{x}^{\ast}\widetilde{\mathbf{\gamma}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+So the steps to complete the two-stage FGLS Gaussian ML estimation are:
+\end_layout
+
+\begin_layout Enumerate
+Calculate the LS fit.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Calculate either 
+\begin_inset Formula $\widehat{\mathbf{\beta}}=\left(\mathbf{x}^{\prime}\mathbf{x}\right)^{-1}\mathbf{x}^{\prime}\mathbf{y}$
+\end_inset
+
+ for the saturated model, or 
+\begin_inset Formula $\widehat{\mathbf{\gamma}}=\left(\mathbf{x}^{\ast\prime}\mathbf{x}^{\ast}\right)^{-1}\mathbf{x}^{\ast\prime}\mathbf{y}$
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+for the subset model.
+\end_layout
+
+\begin_layout Enumerate
+Reshape 
+\begin_inset Formula $\widehat{\mathbf{\beta}}$
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+or 
+\begin_inset Formula $\widehat{\mathbf{\gamma}}$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\end_layout
+
+\end_inset
+
+ to give 
+\begin_inset Formula $\widehat{\mathbf{B}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Calculate 
+\begin_inset Formula $\widehat{\Omega}\,=\widehat{\Sigma}\otimes\mathbf{I}_{n}$
+\end_inset
+
+,
+\begin_inset space \space{}
+\end_inset
+
+where 
+\begin_inset Formula $\widehat{\Sigma}=\frac{\left(\mathbf{Y}-\mathbf{X}\widehat{\mathbf{B}}\right)^{\prime}\left(\mathbf{Y}-\mathbf{X}\widehat{\mathbf{B}}\right)}{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Calculate the GLS fit.
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Calculate 
+\begin_inset Formula $\widetilde{\mathbf{\gamma}}=\left(\mathbf{x}^{\ast\prime}\widehat{\Omega}\,^{-1}\mathbf{x}^{\ast}\right)^{-1}\mathbf{x}^{\ast\prime}\widehat{\Omega}\,^{-1}\mathbf{y}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Calculate 
+\begin_inset Formula $\widetilde{\Sigma}=\frac{\left(\mathbf{Y}-\mathbf{X}\widetilde{\mathbf{B}}\right)^{\prime}\left(\mathbf{Y}-\mathbf{X}\widetilde{\mathbf{B}}\right)}{n}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+By defining the 
+\begin_inset Formula $\left(l+k\left(k+1\right)/2\right)$
+\end_inset
+
+-vector 
+\begin_inset Formula $\widetilde{\theta}\equiv\left(\widetilde{\mathbf{\gamma}}^{\prime},vech\left(\widetilde{\Sigma}\right)^{\prime}\right)^{\prime}$
+\end_inset
+
+, the inverse Fisher information matrix is given by
+\begin_inset Formula 
+\begin{equation}
+\tciFourier^{-1}\left(\widetilde{\theta}\right)=\left[\begin{array}{cc}
+\mathbf{cov}\left(\widetilde{\mathbf{\gamma}}\right) & \mathbf{0}\\
+\mathbf{0} & \frac{2}{n}\mathbf{D}_{p}^{+}\left(\widetilde{\Sigma}\otimes\widetilde{\Sigma}\right)\mathbf{D}_{p}^{+\prime}
+\end{array}\right],\label{Normal IFIM}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{D}_{p}^{+}$
+\end_inset
+
+ is the Moore-Penrose inverse of the duplication matrix 
+\begin_inset Formula $\mathbf{D}_{p}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathbf{cov}\left(\widetilde{\mathbf{\gamma}}\right)=\left(\mathbf{x}^{\ast\prime}\Omega\,^{-1}\mathbf{x}^{\ast}\right)^{-1}$
+\end_inset
+
+ is the asymptotic covariance matrix of the subset VAR coefficients.
+\end_layout
+
+\begin_layout Standard
+When a portfolio of subset VAR models are considered, the log-likelhood
+ is calculated at the FGLS estimates for each of the 
+\begin_inset Formula $M$
+\end_inset
+
+ subset models which leads to the following
+\begin_inset Formula 
+\begin{eqnarray}
+\log L\left(\widetilde{\theta}_{m}\right) & = & -\frac{nk}{2}\log\left(2\pi\right)-\frac{n}{2}\log\left\vert \widetilde{\Sigma}_{m}\right\vert \notag\\
+ &  & -\frac{1}{2}\left(\mathbf{y}-\mathbf{x}_{m}^{\ast}\widetilde{\mathbf{\gamma}}_{m}\right)^{\prime}\left(\widetilde{\Sigma}_{m}^{-1}\otimes\mathbf{I}_{n}\right)\left(\mathbf{y}-\mathbf{x}_{m}^{\ast}\widetilde{\mathbf{\gamma}}_{m}\right)\notag\\
+ & = & -\frac{nk}{2}\log\left(2\pi\right)-\frac{n}{2}\log\left\vert \widetilde{\Sigma}_{m}\right\vert -\frac{nk}{2}.\label{Normal logLikelihood}
+\end{eqnarray}
+
+\end_inset
+
+Also 
+\begin_inset Formula $\widetilde{\theta}_{m}\equiv\left(\widetilde{\mathbf{\gamma}}_{m}^{\prime},vech\left(\widetilde{\Sigma}_{m}\right)^{\prime}\right)^{\prime}$
+\end_inset
+
+ is the 
+\begin_inset Formula $r_{m}\equiv\left(l_{m}+k\left(k+1\right)/2\right)$
+\end_inset
+
+-vector of FGLS estimates of the parameters in the 
+\begin_inset Formula $m^{\text{th}}$
+\end_inset
+
+ subset VAR model with the 
+\begin_inset Formula $\mathbf{x}_{m}^{\ast}$
+\end_inset
+
+ predictor matrix.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Model Selection
+\end_layout
+
+\begin_layout Standard
+Using the results from (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Normal logLikelihood"
+
+\end_inset
+
+), the Information Criteria can be calculated.
+\end_layout
+
+\begin_layout Subsubsection
+AIC
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+AIC\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+2r_{m}\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +2\left(l_{m}+k\left(k+1\right)/2\right).
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+SBC
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+SBC\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\log\left(n\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\log\left(n\right).
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+HQ
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+HQ\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\log\log\left(n\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\log\log\left(n\right).
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+AIC
+\begin_inset Formula $_{\text{C}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+AIC_{C_{A}}\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+2\frac{r_{m}}{n-r_{m}-1}\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +2\frac{\left(l_{m}+k\left(k+1\right)/2\right)}{n-\left(l_{m}+k\left(k+1\right)/2\right)-1}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+AIC_{C_{B}}\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+2\frac{r_{m}}{n-r_{m}-(k+1)/2}\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +2\frac{\left(l_{m}+k\left(k+1\right)/2\right)}{n-\left(l_{m}+k\left(k+1\right)/2\right)-\left(k+1\right)/2}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+CAIC
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+CAIC\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\left(\log\left(n\right)+1\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\left(\log\left(n\right)+1\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+CAICF
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+CAICF\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\left[\log n+2\right]+\log\left\vert \hat{\tciFourier}^{-1}\right\vert \\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\left(\log\left(n\right)+2\right)+\log\left\vert \hat{\tciFourier}^{-1}\right\vert 
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+CAICF
+\begin_inset Formula $_{\text{E}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+CAICF_{E}\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\left[\log n+2\right]+\log\left\vert \hat{\tciFourier}^{-1}\right\vert \\
+ &  & +2tr\left(\hat{\tciFourier}^{-1}\hat{R}\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\left(\log\left(n\right)+2\right)+\log\left\vert \hat{\tciFourier}^{-1}\right\vert \\
+ &  & +2tr\left(\hat{\tciFourier}^{-1}\hat{R}\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+CAICF
+\begin_inset Formula $_{\text{C}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+CAICF_{C}\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\left[\log n+2\right]+\log\left\vert \hat{\tciFourier}^{-1}\right\vert \\
+ &  & +2\left(\frac{nr_{m}}{n-r_{m}-2}\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\left(\log\left(n\right)+2\right)+\log\left\vert \hat{\tciFourier}^{-1}\right\vert \\
+ &  & +2\left(\frac{nr_{m}}{n-r_{m}-2}\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+GAIC
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+GAIC\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+2tr\left(\hat{\tciFourier}^{-1}\hat{R}\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +2tr\left(\hat{\tciFourier}^{-1}\hat{R}\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+ICOMP
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+ICOMP\left(m\right)=-2\log L\left(\widetilde{\theta}_{m}\right)+2C_{1}\left(\hat{\tciFourier}^{-1}\left(\widetilde{\theta}_{m}\right)\right),
+\]
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+\hat{\tciFourier}^{-1}\left(\widetilde{\theta}_{m}\right)=\left[\begin{array}{cc}
+\widehat{\mathbf{cov}}\left(\widetilde{\mathbf{\gamma}}_{m}\right) & \mathbf{0}\\
+\mathbf{0} & \frac{2}{n}\mathbf{D}_{p}^{+}\left(\widetilde{\Sigma}_{m}\otimes\widetilde{\Sigma}_{m}\right)\mathbf{D}_{p}^{+\prime}
+\end{array}\right],
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\widehat{\mathbf{cov}}\left(\widetilde{\mathbf{\gamma}}_{m}\right)$
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\end_layout
+
+\end_inset
+
+ is a consistent estimator of the asymptotic covariance matrix of the subset
+ VAR coefficients.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bea:Boz:1998"
+
+\end_inset
+
+ show that ICOMP can be expressed as
+\begin_inset Formula 
+\begin{eqnarray*}
+ICOMP\left(m\right) & = & nk\left(\log\left(2\pi\right)+1\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert \\
+ &  & +r_{m}\log\left(\frac{tr\left(\widehat{\mathbf{cov}}\left(\widetilde{\mathbf{\gamma}}_{m}\right)\right)+\frac{1}{2n}G_{m}}{r_{m}}\right)\\
+ &  & -\log\left\vert \widehat{\mathbf{cov}}\left(\widetilde{\mathbf{\gamma}}_{m}\right)\right\vert -k\log\left(2\right)+\frac{k\left(k+1\right)}{2}\log\left(n\right)\\
+ &  & -\left(k+1\right)\log\left\vert \widetilde{\Sigma}_{m}\right\vert 
+\end{eqnarray*}
+
+\end_inset
+
+where
+\begin_inset Formula 
+\[
+G_{m}\equiv tr\left(\widetilde{\Sigma}_{m}^{2}\right)+\left(tr\left(\widetilde{\Sigma}_{m}\right)\right)^{2}+2\sum_{i=1}^{k}\widetilde{\sigma}_{i,m}^{2}
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\widetilde{\sigma}_{i,m}^{2}$
+\end_inset
+
+ is the 
+\begin_inset Formula $i^{\text{th}}$
+\end_inset
+
+ diagonal element of 
+\begin_inset Formula $\widetilde{\Sigma}_{m}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+BMS
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+BMS\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\log n+\log\left\vert \hat{\tciFourier}^{-1}\right\vert +2tr\left(\hat{\tciFourier}^{-1}\hat{R}\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\log n\\
+ &  & +\log\left\vert \hat{\tciFourier}^{-1}\right\vert +2tr\left(\hat{\tciFourier}^{-1}\hat{R}\right)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

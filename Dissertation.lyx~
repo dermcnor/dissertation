@@ -1,0 +1,416 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass utthesis
+\begin_preamble
+\title{Adaptive Multivariate Time Series Modeling}
+\author{Derek McCrae Norton}
+\copyrightYear{2011}
+\graduationMonth{August}
+\majorProfessor{Hamparsum Bozdogan}
+\keywords{List, Of, Keywords}
+\viceProvost{Carolyn R. Hodges}
+\major{Statistics}
+\degree{Doctor of Philosophy}
+\college{Business}
+\dept{Statistics, Operations, Management Science}
+\university{The University
+of Tennessee, Knoxville}
+\numberOfCommitteeMembers{2}
+\committeeMemberA {Hamparsum Bozdogan}
+\committeeMemberB {Committee Member 2}
+\committeeMemberC {Committee Member 3}
+\committeeMemberD {Committee Member 4}
+\committeeMemberE {Committee Member 5}
+
+\usepackage{nomencl}    % produces a nomenclature
+\usepackage{graphicx}	% graphics package
+\graphicspath{ {figures/}{figures/eps/}{figures/pdf/} } % specify the path where figures are located
+\usepackage{fancyhdr}  % fancy headers and footers
+\usepackage{url}  % nicely format url breaks
+\usepackage{relsize}  % font sizing hierarchy
+\usepackage{booktabs}  % professional looking tables
+\usepackage[config, labelfont={bf}]{caption,subfig}  % nice sub figures
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\end_preamble
+\options dissertation,letterpaper,12pt
+\use_default_options true
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command bibtex
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{alph} % this is needed to clear certain issues with the hyperref
+ package
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+makeApprovalPage % make the approval page - this is the page that needs
+ to be signed & returned to the thesis/dissertation consultant
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+makeETDApprovalPage % make the Electronic Thesis & Dissertation page - this
+ page is kept with the electronic copy
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToPDFBookmarks{0}{Front Matter}{rootNode} % create a root node named
+ "Front Matter" in the pdf bookmarks
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToPDFBookmarks{1}{Title}{a} % add a pdf bookmark to the title page
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+makeTitlePage % make the title page.
+ Make sure you properly set the 
+\backslash
+docType
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{roman}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{2}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+makeCopyrightPage % make the copyright page
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToPDFBookmarks{1}{Dedication}{b} % add a pdf bookmark to the dedication
+ page
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+include{front-matter/dedication} % include the dedication
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToPDFBookmarks{1}{Acknowledgements}{c} % add a pdf bookmark to the acknowledg
+ements page
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+include{front-matter/acknowledgements} % include the acknowledgements
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToPDFBookmarks{1}{Quote}{d} % add a pdf bookmark to the quotation page
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+include{front-matter/quote} % include a quote
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToPDFBookmarks{1}{Abstract}{e} % add a pdf bookmark to the abstract page
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+include{front-matter/abstract} % your abstract
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToTOC{List of Tables} % this will add the list of tables to the Table
+ of Contents (TOC)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+listoftables % generate a list of tables     %
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToTOC{List of Figures} % this will add the list of figures to the Table
+ of Contents (TOC)
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+listoffigures % generate a list of figures     %
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+makenomenclature % OPTIONAL
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToPDFBookmarks{0}{Nomenclature}{g} % OPTIONAL
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+printnomenclature[1.25in] % OPTIONAL
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+newpage
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{arabic}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "front-matter/nomenclature.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Time Series
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "parts/chapters-1/chapter-1.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "parts/chapters-1/chapter-2.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "parts/chapters-1/chapter-3.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Text Mining
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "references/VectorAutoregression,references/references-dissertation"
+options "plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToTOC{Vita}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "back-matter/vita.tex"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

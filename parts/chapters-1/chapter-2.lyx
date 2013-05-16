@@ -1,0 +1,1313 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass utthesis
+\options dissertation,letterpaper,12pt
+\use_default_options true
+\master ../Dissertation.lyx
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Model Selection Techniques
+\end_layout
+
+\begin_layout Standard
+Model selection should be viewed as the unification of two distinct parts.
+ The first part is the act of subsetting the data.
+ Specifically, this is the means through which various candidate models
+ are fit.
+ The second part involves scoring the candidate models, which gives an overall
+ rank to the fitness of each model with respect to the other models.
+\end_layout
+
+\begin_layout Standard
+Although there are only two seemingly trivial parts, subsetting and scoring,
+ that is not to say that the process is trivial.
+ On the contrary, there are a plethora of choices for how to complete both
+ the subsetting and scoring parts, and each part is not as trivial as it
+ may first seem.
+ Also, the entire process can be made considerably more complex if ones
+ interest lies not only in what variables to include in the model, but also
+ in other factors such as distributional assumptions, methods of estimation,
+ or possibly different model types all together.
+\end_layout
+
+\begin_layout Section
+Information Criteria
+\end_layout
+
+\begin_layout Standard
+Information criteria are the means through which possible candidate models
+ can be scored.
+ The discussion here will be limited to criteria that consist of two parts,
+ which are the lack of fit between the chosen model and the data at hand,
+ and a function which penalizes the first part.
+ In general the first part, or lack of fit, is measured by the likelihood
+ function.
+ This gives a measure of how likely a model is given the data at hand.
+ The second part, or the penalty term, is chosen differently for different
+ criteria, and will be described in detail in the following sections.
+ As a lead in to all of the following criteria, consider
+\begin_inset Formula 
+\begin{equation}
+y=y_{1},y_{2},\ldots,y_{n}\label{random sample}
+\end{equation}
+
+\end_inset
+
+to be a random sample from some process.
+ The underlying data generating process, which is unknown, is denoted 
+\begin_inset Formula $f_{\ast}$
+\end_inset
+
+.
+ A given candidate model will be written as 
+\begin_inset Formula $f_{m}$
+\end_inset
+
+, where 
+\begin_inset Formula $m=1,\ldots,M$
+\end_inset
+
+, and 
+\begin_inset Formula $M$
+\end_inset
+
+ is the number of models entertained.
+ For a more thorough discussion of these techniques see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:1987, Bozd:2000"
+
+\end_inset
+
+ for example.
+\end_layout
+
+\begin_layout Subsection
+AIC
+\end_layout
+
+\begin_layout Standard
+Probably the best known and widely used of information criteria is Akaike's
+ Information Criterion (AIC).
+ Originally set forth in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Akaike:1974, Akaike:1973"
+
+\end_inset
+
+, AIC has been almost universally accepted as a model selection criteria.
+ The central argument put forth by Akaike is that the model that fits the
+ data the best is the model that minimizes the Kullback-Leibler (K-L) informatio
+n from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kull:Leib:1951"
+
+\end_inset
+
+.
+ The K-L information measures how well the candidate model, 
+\begin_inset Formula $f_{m}$
+\end_inset
+
+, approximates the true model, 
+\begin_inset Formula $f_{\ast}$
+\end_inset
+
+, and is given by
+\begin_inset Formula 
+\begin{eqnarray}
+I\left(f^{\ast},f_{m}\right) & = & E_{\ast}\left[\log\left(f_{\ast}\right)-\log\left(f_{m}\right)\right]\label{K-L Divergence}\\
+ & = & E_{\ast}\left[\log\left(f_{\ast}\right)\right]-E_{\ast}\left[\log\left(f_{m}\right)\right]\nonumber \\
+ & = & H\left(f_{\ast};f_{\ast}\right)-H\left(f_{\ast};f_{m}\right)\nonumber 
+\end{eqnarray}
+
+\end_inset
+
+where 
+\begin_inset Formula $E_{\ast}$
+\end_inset
+
+ is the expectation with respect to the true model 
+\begin_inset Formula $f_{\ast}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $H\left(f_{\ast};f_{\ast}\right)\equiv H\left(f_{\ast}\right)$
+\end_inset
+
+ is a constant in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "K-L Divergence"
+
+\end_inset
+
+, so only the cross-entropy
+\begin_inset Formula 
+\begin{equation}
+H\left(f_{\ast};f_{m}\right)=E_{\ast}\left[\log\left(f_{m}\right)\right]\label{Cross Entropy}
+\end{equation}
+
+\end_inset
+
+needs estimation.
+ One possible estimator for 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Cross Entropy"
+
+\end_inset
+
+ is 
+\begin_inset Formula $\log L\left(\hat{\theta}_{m}\right)$
+\end_inset
+
+, the maximized log likelihood function using the maximum likelihood estimate
+ (MLE), 
+\begin_inset Formula $\hat{\theta}_{m}$
+\end_inset
+
+, for the model parameters 
+\begin_inset Formula $\theta$
+\end_inset
+
+.
+ This is often an overly optimistic estimate of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Cross Entropy"
+
+\end_inset
+
+, due to the fact that the data from 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "random sample"
+
+\end_inset
+
+ is used to estimate both the model parameters and the cross-entropy.
+ It can be shown that this estimation bias is equal to 
+\begin_inset Formula $nb$
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Koni:Kita:1996"
+
+\end_inset
+
+.
+ 
+\begin_inset space \space{}
+\end_inset
+
+Akaike made the assumptions that the model would be estimated using maximum
+ likelihood, and that the underlying data generating process is included
+ in the candidate models.
+ With these assumptions, Akaike shows that the bias, 
+\begin_inset Formula $nb$
+\end_inset
+
+, is approximately equal to the number of parameters in the model.
+ This leads to an unbiased estimator of 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Cross Entropy"
+
+\end_inset
+
+, namely
+\begin_inset Formula 
+\begin{equation}
+AIC=-2\log L\left(\hat{\theta}_{m}\right)+2r,\label{AIC}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $r$
+\end_inset
+
+ is the number of parameters estimated in the candidate model.
+ Thus, AIC is calculated for all candidate model and the minimum over all
+ models is chosen as the best fitting.
+\end_layout
+
+\begin_layout Subsection
+SBC / BIC / MDL
+\end_layout
+
+\begin_layout Standard
+Interestingly, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Schw:1978"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Akaike:1978"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Riss:1978"
+
+\end_inset
+
+ and all followed very different derivations, yet still came up with the
+ same criterion.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Schw:1978"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Akaike:1978"
+
+\end_inset
+
+ both used a Bayesian derivation, while 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Riss:1978"
+
+\end_inset
+
+ based his derivation on the information theoretic minimum code length for
+ the data along with the model parameters.
+ Due to the similarities within Scwharz's Bayesian Criterion (SBC), Akaike's
+ Bayesian Information Criterion (BIC), and Rissanen's Minimum Description
+ Length (MDL), the term SBC will be used consistently throughout this work,
+ and the form of this criterion is given by
+\begin_inset Formula 
+\begin{equation}
+SBC=-2\log L\left(\hat{\theta}_{m}\right)+r\log\left(n\right).\label{SBC}
+\end{equation}
+
+\end_inset
+
+This particular criterion, unlike AIC, is consistent.
+ This means that if the underlying data generating process is one of the
+ models considered, that the criterion will select it with probability approachi
+ng one as sample size approaches infinity.
+\end_layout
+
+\begin_layout Subsection
+HQ
+\end_layout
+
+\begin_layout Standard
+Also in an attempt to create a consistent estimator, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hann:Quin:1979"
+
+\end_inset
+
+ derived a criterion denoted (HQ) based on the law of iterated logarithms.
+ The form of this criterion is given by
+\begin_inset Formula 
+\begin{equation}
+HQ=-2\log L\left(\hat{\theta}_{m}\right)+r\log\log\left(n\right).\label{HQ}
+\end{equation}
+
+\end_inset
+
+This criterion was derived with the hopes to underestimate the order of
+ autoregressive models to a lesser degree than SBC, and attempts to achieve
+ this through the fact that the second term increases at a slower rate than
+ 
+\begin_inset Formula $k\log\left(n\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Finite Sample Corrected AIC
+\end_layout
+
+\begin_layout Standard
+Initially developed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sugi:1978"
+
+\end_inset
+
+ and then used by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hurv:Tsai:1989"
+
+\end_inset
+
+, 
+\begin_inset Formula $AIC_{C}$
+\end_inset
+
+ estimates the exact value of the bias, 
+\begin_inset Formula $b$
+\end_inset
+
+, from estimating 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Cross Entropy"
+
+\end_inset
+
+ in the multiple regression case leading to
+\begin_inset Formula 
+\begin{equation}
+AIC_{C_{A}}=-2\log L\left(\hat{\theta}_{m}\right)+2\left(\frac{nr}{n-r-1}\right).\label{AICc (regression)}
+\end{equation}
+
+\end_inset
+
+Though useful in small sample situations, the bias should be estimated for
+ the model at hand.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hurv:Tsai:1993"
+
+\end_inset
+
+ estimate the bias specifically for VAR models leading to
+\begin_inset Formula 
+\begin{equation}
+AIC_{C_{B}}=-2\log L\left(\hat{\theta}_{m}\right)+2\left(\frac{nr}{n-r-\frac{k+1}{2}}\right)\label{AICc VAR}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Consistent AIC
+\end_layout
+
+\begin_layout Standard
+In an attempt to yield a consistent estimator, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:1987"
+
+\end_inset
+
+ follows the derivation of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Akaike:1973"
+
+\end_inset
+
+ and adds the thought that when testing a null hypothesis versus an alternative
+ hypothesis using a parameter, the degrees of freedom is an increasing function
+ of the sample size if the test statistic follows a noncentral chi-squared
+ distribution.
+ With that thought in mind, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:1987"
+
+\end_inset
+
+ derived an adjustment to AIC which reflects a dependence on the sample
+ size.
+ Namely
+\begin_inset Formula 
+\begin{equation}
+CAIC=-2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+1\right].\label{CAIC}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Consistent AIC with Fisher Information
+\end_layout
+
+\begin_layout Standard
+Exploiting the large sample asymptotic distributional properties of the
+ MLE, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:1987"
+
+\end_inset
+
+ proposes another consistent information criterion which penalizes overparameter
+ization strongly, especially for large sample sizes.
+ This criterion is defined as
+\begin_inset Formula 
+\begin{equation}
+CAICF=-2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert .\label{CAICF}
+\end{equation}
+
+\end_inset
+
+This criteria was further extended in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:Ueno:2000"
+
+\end_inset
+
+ in the bayesian framework to
+\begin_inset Formula 
+\begin{eqnarray}
+CAICF_{E} & = & -2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
+ &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right),\label{CAICF_E}
+\end{eqnarray}
+
+\end_inset
+
+which includes 
+\begin_inset Formula $AIC$
+\end_inset
+
+, 
+\begin_inset Formula $GAIC$
+\end_inset
+
+, 
+\begin_inset Formula $SBC$
+\end_inset
+
+, and 
+\begin_inset Formula $CAICF$
+\end_inset
+
+ as special cases.
+ The 
+\begin_inset Formula $CAICF_{E}$
+\end_inset
+
+ penalizes overparameterization more harshly than the 
+\begin_inset Formula $CAICF$
+\end_inset
+
+.
+ One further step taken in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:Ueno:2000"
+
+\end_inset
+
+, is to approximate the last term of 
+\begin_inset Formula $CAICF_{E}$
+\end_inset
+
+ to correct for the bias of small sample size.
+ This approximation leads to
+\begin_inset Formula 
+\begin{eqnarray}
+CAICF_{C} & \cong & -2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
+ &  & +2\left(\frac{nr}{n-r-2}\right).\label{CAICF_C}
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Generalized AIC
+\end_layout
+
+\begin_layout Standard
+A generalization of AIC attempts to determine the penalty term in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "AIC"
+
+\end_inset
+
+ differently for different models and data sets.
+ This is accomplished by replacing 
+\begin_inset Formula $k$
+\end_inset
+
+, the number of parameters, with an adaptive value leading to
+\begin_inset Formula 
+\begin{equation}
+GAIC=-2\log L\left(\hat{\theta}_{m}\right)+2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right),\label{GAIC}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{\mathcal{F\,}}^{-1}$
+\end_inset
+
+ is the estimated Inverse Fisher Information Matrix (IFIM) in inner product
+ form, and 
+\begin_inset Formula $\hat{R}$
+\end_inset
+
+ is the estimated Fisher information matrix in outer product form.
+ The penalty term, 
+\begin_inset Formula $tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right)$
+\end_inset
+
+, reduces to 
+\begin_inset Formula $r$
+\end_inset
+
+, the number of parameters, if the estimated model is the actual model,
+ and if certain regularity conditions hold.
+ For more information, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Take:1976"
+
+\end_inset
+
+ for example.
+\end_layout
+
+\begin_layout Subsection
+Information Complexity
+\end_layout
+
+\begin_layout Standard
+Information Complexity (ICOMP) is a novel approach to the development of
+ an information criterion formulated by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:1988, Bozd:1990"
+
+\end_inset
+
+.
+ ICOMP aims to select models with a form similar to other information criteria,
+ i.e.
+ with a penalized likelihood; however this is where the similarity ends.
+ Instead of penalty terms based on sample size or number of parameters,
+ ICOMP penalizes the likelihood based on a measure of covariance complexity.
+ For an in depth look at this measure of complexity, the reader is referred
+ to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "vanEmden:1971"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:1990"
+
+\end_inset
+
+.
+ For the purposes here, let 
+\begin_inset Formula $C\left(\cdot\right)$
+\end_inset
+
+ be a real-valued measure of complexity of a system.
+ There are various measures of complexity, such as the 
+\begin_inset Formula $C_{0}\left(\cdot\right)$
+\end_inset
+
+ measure of complexity of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "vanEmden:1971"
+
+\end_inset
+
+, however the focus here is the 
+\begin_inset Formula $C_{1}\left(\cdot\right)$
+\end_inset
+
+ measure of complexity, where
+\begin_inset Formula 
+\begin{equation}
+C_{1}\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)=\frac{k}{2}\log\left(\frac{tr\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)}{k}\right)-\frac{1}{2}\log\left\vert \mathbf{cov}\left(\hat{\theta}_{m}\right)\right\vert .\label{C_1 Complexity}
+\end{equation}
+
+\end_inset
+
+Rewritten as
+\begin_inset Formula 
+\[
+C_{1}\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)=\frac{1}{2}\log\frac{\left(\frac{tr\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)}{k}\right)^{k}}{\left\vert \mathbf{cov}\left(\hat{\theta}_{m}\right)\right\vert },
+\]
+
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "C_1 Complexity"
+
+\end_inset
+
+ can be interpreted as a trade-off between the geometric mean of the average
+ total variation of the parameters and the generalized variance of the parameter
+s.
+ From this measure of complexity, a general form of ICOMP is defined as
+\begin_inset Formula 
+\begin{equation}
+ICOMP\left(m\right)=-2\log L\left(\hat{\theta}_{m}\right)+2C_{1}\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right).\label{ICOMP}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The issue now becomes, how to estimate 
+\begin_inset Formula $\mathbf{cov}\left(\hat{\theta}_{m}\right)$
+\end_inset
+
+ in practice.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bea:Boz:2000"
+
+\end_inset
+
+ argue that when the parametric family of probability models, 
+\begin_inset Formula $f_{m}$
+\end_inset
+
+, is correctly specified,
+\begin_inset Formula 
+\[
+\mathbf{cov}\left(\theta_{m}^{ML}\right)\thickapprox\mathcal{F}^{-1}\left(\theta_{m}^{ML}\right),
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{F}^{-1}\left(\theta_{m}^{ML}\right)$
+\end_inset
+
+ is the inverse Fisher information matrix (IFIM).
+ This leads to the ICOMP(IFIM) criterion
+\begin_inset Formula 
+\begin{equation}
+ICOMP\left(IFIM\right)=-2\log L\left(\hat{\theta}_{m}\right)+2C_{1}\left(\hat{\mathcal{F}}^{-1}\left(\hat{\theta}_{m}\right)\right)\label{ICOMP(IFIM)}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{\mathcal{F}}^{-1}\left(\hat{\theta}_{m}\right)$
+\end_inset
+
+ is the estimated Fisher information matrix, as seen in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "GAIC"
+
+\end_inset
+
+, based on the maximum likelihood estimates.
+\end_layout
+
+\begin_layout Subsection
+Bayesian Model Selection Criteria
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:Ueno:2000"
+
+\end_inset
+
+ derive a models selection criteria in the bayesian framework as follows:
+\begin_inset Formula 
+\begin{eqnarray}
+BMS & = & -2\log L\left(\hat{\theta}_{m}\right)-2\log\pi\left(\hat{\theta}_{m}\right)+r\log n+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
+ &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right).\label{BMS1}
+\end{eqnarray}
+
+\end_inset
+
+If a constant prior is assumed, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "BMS1"
+
+\end_inset
+
+ reduces to:
+\begin_inset Formula 
+\[
+BMS=-2\log L\left(\hat{\theta}_{m}\right)+r\log n+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Genetic Algorithm
+\end_layout
+
+\begin_layout Standard
+Initially developed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Holland:1975"
+
+\end_inset
+
+, the Genetic Algorithm (GA) is an extension of research into evolutionary
+ algorithms.
+ The GA
+\begin_inset space \space{}
+\end_inset
+
+allows for a search over the entire sample space, i.e.
+ not local, without the need for testing all subsets.
+ The GA is particularly useful when the function to be optimized is not
+ smooth, has multiple optima, or has a large number of parameters, which
+ is certainly true in the case subset selection.
+ Following the methodology in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bea:Boz:1998, Bea:Boz:2000"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:2003"
+
+\end_inset
+
+, the genetic algorithm implemented here to aid in subset selection is detailed
+ below.
+\end_layout
+
+\begin_layout Subsection
+GA Coding Scheme
+\end_layout
+
+\begin_layout Standard
+A binary string is used to indicate which combination of predictor variables
+ are included in a model.
+ A 
+\begin_inset Formula $1$
+\end_inset
+
+ indicates that a particular variable is included, and a 
+\begin_inset Formula $0$
+\end_inset
+
+ indicates that the variable is excluded.
+ Each string is the same length, namely length 
+\begin_inset Formula $kp+d$
+\end_inset
+
+, where the number of lags, 
+\begin_inset Formula $p$
+\end_inset
+
+, and the number of deterministic terms, 
+\begin_inset Formula $d$
+\end_inset
+
+, to be examined are determined 
+\shape italic
+a priori
+\shape default
+.
+ Using the example in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "3 var, 3 lag example"
+
+\end_inset
+
+ and assuming that we allow for an intercept term for each variable, the
+ binary string representing a model will be 
+\begin_inset Formula $kp+d=3\times3+3=12$
+\end_inset
+
+ digits long.
+ Specifically, 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "3 var, 3 lag example"
+
+\end_inset
+
+ is represented as
+\begin_inset Formula 
+\[
+\begin{array}{ccc}
+\underbrace{\begin{array}{cccc}
+0\text{ } & 1\text{ } & 1\text{ } & 1\end{array}} & \underbrace{\begin{array}{cccc}
+0\text{ } & 1\text{ } & 1\text{ } & 1\end{array}} & \underbrace{\begin{array}{cccc}
+0\text{ } & 1\text{ } & 1\text{ } & 1\end{array}}\\
+\mathbf{y}_{1} & \mathbf{y}_{2} & \mathbf{y}_{3}
+\end{array},
+\]
+
+\end_inset
+
+where the 
+\begin_inset Formula $0$
+\end_inset
+
+'s represent the absence of intercept terms.
+ With this method, it is easy to see that the model represented by 
+\begin_inset Formula $111111111111$
+\end_inset
+
+ is the saturated model, or that 
+\begin_inset Formula $100010001000$
+\end_inset
+
+ is the model with only an intercept for each variable.
+\end_layout
+
+\begin_layout Subsection
+Initial Population of Models
+\end_layout
+
+\begin_layout Standard
+To create the first pool of potential breeding pairs, first the population
+ size, 
+\begin_inset Formula $N_{GA}$
+\end_inset
+
+, must be determined.
+ With that determination, 
+\begin_inset Formula $N_{GA}$
+\end_inset
+
+ strings are randomly generated to represent the the models in the initial
+ population.
+ Of course the size of the initial population, as well as a few other parameters
+ related to how the GA explores the model space must be chosen by the user.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "DeJong:1975"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Grefen:1986"
+
+\end_inset
+
+ both give some idea for these parameters, 
+\begin_inset Formula $N_{GA}=50-100$
+\end_inset
+
+ and 
+\begin_inset Formula $N=30$
+\end_inset
+
+ respectively; however these parameters are highly dependent on each other
+ and the optimization problem at hand.
+\end_layout
+
+\begin_layout Subsubsection
+Fitness Function
+\end_layout
+
+\begin_layout Standard
+The fitness function what represents the 
+\begin_inset Quotes grd
+\end_inset
+
+survival of the fittest”
+\begin_inset space \space{}
+\end_inset
+
+in the GA.
+ Information criteria attempt to quantify how 
+\begin_inset Quotes grd
+\end_inset
+
+fit” a particular model is from a statistical standpoint, and as such are
+ the logical choice for the fitness function.
+ All of the criteria presented in the previous section, are candidates for
+ the fitness function, and will be examined for performance in subsequent
+ chapters.
+ Generally, the higher the fitness function the better, however with information
+ criteria lower is better.
+ This convention will be used throughout.
+\end_layout
+
+\begin_layout Subsection
+Selection for Mating Pool
+\end_layout
+
+\begin_layout Standard
+The fitness function gives an idea of how fit a potential mate is, but there
+ must be a procedure for the selection of mating a mating pool and selection
+ of the mating pairs.
+ Two possibilities will be considered here, and as with the fitness function
+ will be examined for performance in subsequent chapters.
+\end_layout
+
+\begin_layout Subsubsection
+Rank Based Selection
+\end_layout
+
+\begin_layout Standard
+The first selection procedure is based on the ranking procedure of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Baker:1985"
+
+\end_inset
+
+.
+ First, the fitness function is computed for all 
+\begin_inset Formula $N_{GA}$
+\end_inset
+
+ models in the parent population.
+ The models are then sorted by the fitness function from largest to smallest,
+ so that the worst model (i.e.
+ highest criterion value) is ranked 
+\begin_inset Formula $1$
+\end_inset
+
+ and the best model is ranked 
+\begin_inset Formula $N_{GA}$
+\end_inset
+
+.
+ Then, following the methodology of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bea:Boz:1998, Bea:Boz:2000"
+
+\end_inset
+
+, a "weighted roulette wheel" with 
+\begin_inset Formula $N_{GA}$
+\end_inset
+
+ bins is created where the bin width for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ ranked model is
+\begin_inset Formula 
+\begin{equation}
+\frac{i}{N_{GA}\left(N_{GA}+1\right)/2}.
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula $N_{GA}$
+\end_inset
+
+ draws are then taken from a 
+\begin_inset Formula $Uniform\left(0,1\right)$
+\end_inset
+
+ distribution, and a model is included in the mating pool when one of the
+ random numbers falls in that model's bin.
+\end_layout
+
+\begin_layout Subsubsection
+Proportional Selection
+\end_layout
+
+\begin_layout Standard
+The second selection procedure is a proportional selection detailed in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Bozd:2003"
+
+\end_inset
+
+.
+ Specifically, after the fitness function (
+\begin_inset Formula $ff$
+\end_inset
+
+) is calculated for each model, the following difference is calculated for
+ each model
+\begin_inset Formula 
+\begin{equation}
+\Delta ff_{i}=ff_{\max}-ff_{i}
+\end{equation}
+
+\end_inset
+
+for 
+\begin_inset Formula $i=1,\ldots,N_{GA}$
+\end_inset
+
+.
+ The average of the differences are then computed.
+\begin_inset Formula 
+\begin{eqnarray}
+\overline{\Delta ff\,} & = & \frac{1}{N_{GA}}\sum_{i=1}^{N_{GA}}\Delta ff_{i}\nonumber \\
+ & = & \frac{1}{N_{GA}}\sum_{i=1}^{N_{GA}}ff_{\max}-ff_{i}\nonumber \\
+ & = & ff_{\max}-\overline{ff\,}
+\end{eqnarray}
+
+\end_inset
+
+Then the following ratio
+\begin_inset Formula 
+\begin{equation}
+\frac{\Delta ff_{i}}{\overline{\Delta ff\,}}\label{ff Ratio}
+\end{equation}
+
+\end_inset
+
+is computed for each model.
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "ff Ratio"
+
+\end_inset
+
+ is then used to to pick the models to be included in the mating pool.
+ With this method, the chance of a model being chosen for mating is proportional
+ to 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "ff Ratio"
+
+\end_inset
+
+.
+ One possible drawback to this procedure is that the least fit model, i.e.
+ the model with the highest 
+\begin_inset Formula $ff$
+\end_inset
+
+, has a 
+\begin_inset Formula $\Delta ff_{i}$
+\end_inset
+
+ of 
+\begin_inset Formula $0$
+\end_inset
+
+, which in turn leads to that model having no chance of being selected for
+ mating.
+ 
+\begin_inset space \space{}
+\end_inset
+
+That shouldn't matter much in later generations, but might make quite a
+ difference in early generations.
+\end_layout
+
+\begin_layout Subsubsection
+Boltzmann Selection
+\end_layout
+
+\begin_layout Standard
+In an attempt to prevent the GA from premature convergence, Boltzmann Selection
+ utilizes a continuously varying "temperature" to adjust how quickly the
+ GA converges.
+ In early generations, the temperature start high which in turn increases
+ the randomness of mating pool selection.
+ As generations proceed, the temperature gradually decreases thereby giving
+ more fit models correspondingly larger chance of entering the mating pool.
+ For some examples, refer to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Gold:1990"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "DeMa:Tid:1991"
+
+\end_inset
+
+.
+ Specifically, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "DeMa:Tid:1991"
+
+\end_inset
+
+ shows that this method performs better than fitness proportionate selection
+ on a small group of problems.
+ Below is one possible choice for the temperature function, where 
+\begin_inset Formula $t$
+\end_inset
+
+ is the generation, 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ are arbitrary constants that control speed of convergence and convergence
+ value respectively, and 
+\begin_inset Formula $\sigma_{ff_{t}}^{2}$
+\end_inset
+
+ is the variance of the fitness functions at generation 
+\begin_inset Formula $t$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+T_{t}=\frac{c_{1}\sigma_{ff_{t}}^{2}}{t^{2}}+c_{2}
+\end{equation}
+
+\end_inset
+
+Using the temperature, the following ratio
+\begin_inset Formula 
+\begin{equation}
+E\left(i,t\right)=\frac{\exp\left(-ff_{i}/T_{t}\right)}{\sum\limits _{i=1}^{n}\exp\left(-ff_{i}/T_{t}\right)}\label{Boltzman Ratio}
+\end{equation}
+
+\end_inset
+
+is calculated for each model.
+ With this method, the chance of a model being chosen for mating is proportional
+ to 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "Boltzman Ratio"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Mating
+\end_layout
+
+\begin_layout Subsection
+Mutation
+\end_layout
+
+\begin_layout Subsection
+Elitism
+\end_layout
+
+\begin_layout Standard
+First introduced by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "DeJong:1975"
+
+\end_inset
+
+, elitism forces the GA to retain a predetermined number of the "best" models
+ at each generation.
+ This combined with Boltzmann selection will allow for a more thorough search
+ of the model space, but will guarantee that very fit models early on are
+ not lost.
+\end_layout
+
+\end_body
+\end_document

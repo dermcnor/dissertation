@@ -1,0 +1,432 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass utthesis
+\options dissertation,letterpaper,12pt
+\use_default_options true
+\master ../Dissertation.lyx
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine natbib_authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Standard
+Often an interest in predictions of future values occurs.
+ Sometimes these future values are based solely on a single predictor, whether
+ that predictor is another variable or simply the lagged variable of interest.
+ However, the case is more often a complex interrelationship of multiple
+ variables where future values for all variables are of interest.
+ Models that adequately describe these complex interrelationships are the
+ focus here.
+ Specifically Vector Autoregressive (VAR) models are to be considered.
+\end_layout
+
+\begin_layout Section
+Motivations for VAR Models
+\end_layout
+
+\begin_layout Standard
+Most of the existing literature treats VAR models as the sole dominion of
+ economic or financial prediction.
+ This is certainly not unreasonable considering the seminal paper by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Sims:1980"
+
+\end_inset
+
+.
+ There are, of course, some instances in the literature outside of that
+ domain, such as 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cres:Ente:1999"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Free:Will:Lin:1989"
+
+\end_inset
+
+.
+ While many of the possible applications for VAR models are economic in
+ nature, there are certainly abundant non-economic applications.
+ To this end, forecasting will be the main focus of this work, with certain
+ topics such as cointegration noticeably absent.
+ Cointegration, for example, certainly seems justifiable in certain economic
+ applications, but is not necessarily as justifiably in other areas of applicati
+on, and certainly not desirable if interpretation or explainability of the
+ model and parameters is an issue.
+\end_layout
+
+\begin_layout Section
+VAR Model Specification
+\end_layout
+
+\begin_layout Standard
+In the univariate case, a simple autoregressive model of order 
+\begin_inset Formula $p$
+\end_inset
+
+, AR
+\begin_inset Formula $(p)$
+\end_inset
+
+, can be written as
+\begin_inset Formula 
+\[
+y_{t}=\gamma d+\sum_{i=1}^{p}\phi_{i}y_{t-i}+\varepsilon_{t},
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $d$
+\end_inset
+
+ is a matrix of deterministic terms to represent the intercept, linear trend
+ 
+\begin_inset Formula $t$
+\end_inset
+
+, quadratic trend 
+\begin_inset Formula $t^{2}$
+\end_inset
+
+, or other terms such as seasonal dummies.
+ 
+\begin_inset space \space{}
+\end_inset
+
+The multivariate extension, VAR
+\begin_inset Formula $(p)$
+\end_inset
+
+, is simply
+\begin_inset Formula 
+\begin{equation}
+\mathbf{y}_{t}=\Gamma D+\sum_{i=1}^{p}\Phi_{i}\mathbf{y}_{t-i}+\varepsilon_{t}.
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{y}_{t}=\left(y_{1t},\ldots,y_{kt}\right)^{\prime}$
+\end_inset
+
+ is a 
+\begin_inset Formula $\left(k\times1\right)$
+\end_inset
+
+ random vector, the 
+\begin_inset Formula $\Phi_{i}$
+\end_inset
+
+ are fixed 
+\begin_inset Formula $\left(k\times k\right)$
+\end_inset
+
+ coefficient matrices, and 
+\begin_inset Formula $\varepsilon_{t}=\left(\varepsilon_{1t},\ldots,\varepsilon_{kt}\right)^{\prime}$
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+is the 
+\begin_inset Formula $\left(k\times1\right)$
+\end_inset
+
+ error vector such that 
+\begin_inset Formula $\varepsilon_{t}\overset{i.i.d.}{\thicksim}\left(0,\Sigma\right)$
+\end_inset
+
+.
+ Here no actual distributional assumptions are made, but that will be addressed
+ in subsequent chapters.
+ Again, as in the univariate case the first term in the model, 
+\begin_inset Formula $\Gamma D$
+\end_inset
+
+, is any deterministic terms included in the model.
+ The addition of the deterministic term is not often seen, but is included
+ here for reasons that will become clear in later chapters.
+\end_layout
+
+\begin_layout Standard
+The main goal of the VAR model is a better understanding of underlying relations
+hips.
+\begin_inset space \space{}
+\end_inset
+
+Whether this understanding is simply to describe the relationships between
+ variables or to predict future outcomes, it is necessary to achieve a model
+ that is both parsimonious and has minimum variance.
+\begin_inset space \space{}
+\end_inset
+
+It becomes clear that a fully ranked VAR model may not satisfy either condition.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Example 1.1
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Consider 
+\begin_inset Formula $\mathbf{y}_{t}$
+\end_inset
+
+, a matrix of 
+\begin_inset Formula $k=3$
+\end_inset
+
+ time series variables that are hypothesized to depend on 
+\begin_inset Formula $p=3$
+\end_inset
+
+ lags of previous values.
+\begin_inset Formula 
+\begin{equation}
+\mathbf{y}_{t}=\Phi_{1}\mathbf{y}_{t-1}+\Phi_{2}\mathbf{y}_{t-2}+\Phi_{3}\mathbf{y}_{t-3}+\varepsilon_{t}\label{eq: 3 var, 3 lag example}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This model despite its seeming simplicity is not simple, and can be seen
+ if we expand the notation in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq: 3 var, 3 lag example"
+
+\end_inset
+
+ to get
+\begin_inset Formula 
+\begin{eqnarray}
+\left[\begin{array}{c}
+\mathbf{y}_{1,t}\\
+\mathbf{y}_{2,t}\\
+\mathbf{y}_{3,t}
+\end{array}\right] & = & \left[\begin{array}{ccc}
+\phi_{1,1,1} & \phi_{1,2,1} & \phi_{1,3,1}\\
+\phi_{2,1,1} & \phi_{2,2,1} & \phi_{2,3,1}\\
+\phi_{3,1,1} & \phi_{3,2,1} & \phi_{3,3,1}
+\end{array}\right]\mathbf{y}_{t-1}+\left[\begin{array}{ccc}
+\phi_{1,1,2} & \phi_{1,2,2} & \phi_{1,3,2}\\
+\phi_{2,1,2} & \phi_{2,2,2} & \phi_{2,3,2}\\
+\phi_{3,1,2} & \phi_{3,2,2} & \phi_{3,3,2}
+\end{array}\right]\mathbf{y}_{t-2}\notag\nonumber \\
+ &  & +\left[\begin{array}{ccc}
+\phi_{1,1,3} & \phi_{1,2,3} & \phi_{1,3,3}\\
+\phi_{2,1,3} & \phi_{2,2,3} & \phi_{2,3,3}\\
+\phi_{3,1,3} & \phi_{3,2,3} & \phi_{3,3,3}
+\end{array}\right]\mathbf{y}_{t-3}+\varepsilon_{t}.\label{eq: 3 var, 3 lag expanded}
+\end{eqnarray}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Clearly 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq: 3 var, 3 lag expanded"
+
+\end_inset
+
+ has quite a few parameters to be estimated.
+ Specifically it has 
+\begin_inset Formula $k^{2}\times p=3^{2}\times3=27$
+\end_inset
+
+ plus the variance leading to 
+\begin_inset Formula $28$
+\end_inset
+
+ parameters to estimate.
+ Also this does not even include deterministic terms.
+\end_layout
+
+\begin_layout Section
+Motivations for Information Criteria
+\end_layout
+
+\begin_layout Standard
+To achieve a more parsimonious model and also a lower variance competing
+ models must be compared.
+\begin_inset space \space{}
+\end_inset
+
+This can be done through a variety of methods, but here the focus is the
+ use of information criteria.
+ An information criteria allows for the comparison of not only different
+ lag lengths, but also subset models of reduced rank.
+ This is highly advantageous since it allows for a model with a great deal
+ of flexibility.
+ The problem now becomes which criteria to use.
+ There are many options to solve this problem, such as Akaike's Information
+ Criterion (AIC), Schwarz Bayesian Criterion (SBC), Rissanen's Minimum Descripti
+on Length (MDL), and Bozdogan's Information Complexity (ICOMP) for some
+ examples.
+\end_layout
+
+\begin_layout Section
+Motivations for GA
+\end_layout
+
+\begin_layout Standard
+In the previous section, the example of a seemingly simple VAR
+\begin_inset Formula $(3)$
+\end_inset
+
+ for 
+\begin_inset Formula $k=3$
+\end_inset
+
+ variables was introduced.
+ In light of parsimony and minimal variance, various competing models could
+ be compared using some form of information criteria.
+ However, like the previous example, this is not as easy as on might initially
+ consider.
+ To look at all possible subsets for the example would require looking at
+ 
+\begin_inset Formula $2^{k^{2}p}-1=2^{27}-1=$
+\end_inset
+
+ over 
+\begin_inset Formula $134$
+\end_inset
+
+ million models.
+ If it took 
+\begin_inset Formula $.5$
+\end_inset
+
+ seconds to test each model, this 
+\begin_inset Quotes grd
+\end_inset
+
+simple”
+\begin_inset space \space{}
+\end_inset
+
+task would take over 
+\begin_inset Formula $2$
+\end_inset
+
+ years to complete.
+\begin_inset space \space{}
+\end_inset
+
+All possible subsets is the only way to guarantee the best model among competing
+ models, but there are other possibilities for subsetting.
+ Unfortunately, traditional procedures such as stepwise selection do not
+ tend to perform well.
+ This leads to the motivation for the use of an improved search algorithm
+ which comes in the form of the genetic algorithm (GA).
+\begin_inset space \space{}
+\end_inset
+
+The GA provides a means to search the possible subsets and obtain a new
+ optimal model in terms of the information criteria.
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout Standard
+The goal of the remainder of this work is to offer valid alternatives to
+ the basic VAR model to deal with the so-called 
+\begin_inset Quotes grd
+\end_inset
+
+real world”
+\begin_inset space \space{}
+\end_inset
+
+data that often invalidates many of the normal modeling assumptions.
+ The hope is to complete that goal while incorporating the novel combination
+ of model selection and the genetic algorithm to lead to appropriate models
+ that achieve parsimony and minimal variance.
+\end_layout
+
+\end_body
+\end_document
