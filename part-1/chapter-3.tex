@@ -1,0 +1,284 @@
+
+\chapter{VAR Models Under Gaussian Errors}
+
+
+\section{VAR Basics}
+
+Classically this is the error distribution associated with VAR as
+well as most other regression type models, at least initially.\ For
+that reason, the discussion here also commences in such a manner.
+Consider again the initial formulation of the VAR
+\begin{equation}
+\mathbf{y}_{t}=\Gamma D+\sum_{i=1}^{p}\Phi_{i}\mathbf{y}_{t-i}+\varepsilon_{t}.\label{VAR (Basic)}
+\end{equation}
+Now the following definitions are made, as given by \citet{Luetk:1993},
+\begin{equation}
+\begin{array}{ll}
+\mathbf{Y}\,=\left(\mathbf{y}_{1},\mathbf{y}_{2},\ldots,\mathbf{y}_{n}\right)^{\prime} & \left(n\times k\right)\\
+\mathbf{x}_{t}=\left(D,\mathbf{y}_{t-1}^{\prime},\mathbf{y}_{t-2}^{\prime},\ldots,\mathbf{y}_{t-p}^{\prime}\right)^{\prime} & (q\times1)\\
+\mathbf{X}\,=\left(\mathbf{x}_{1},\mathbf{x}_{2},\ldots,\mathbf{x}_{n}\right)^{\prime} & \left(n\times q\right)\\
+\mathbf{B}\,=\left(\Gamma,\Phi_{1},\ldots,\Phi_{p}\right)^{\prime} & \left(q\times k\right)\\
+\mathbf{E}\,=\left(\varepsilon_{1},\varepsilon_{2},\ldots,\varepsilon_{n}\right)^{\prime} & \left(n\times k\right),
+\end{array}\label{MV Nomenclature}
+\end{equation}
+where $q=kp+d$, and $d\geq0$ depends on what deterministic or intercept
+terms are included. The definitions in (\ref{MV Nomenclature}) allow
+for a simplified representation of the VAR model given by
+\begin{equation}
+\mathbf{Y}=\mathbf{XB}+\mathbf{E.}\label{VAR (Matrix)}
+\end{equation}
+(\ref{VAR (Matrix)}) corresponds to the saturated VAR model, however
+the interest here is in subset VAR\ models. Following the definitions
+in \citet{Luetk:1993}, (\ref{VAR (Matrix)}) can be rewritten in
+vectorized form as
+\begin{equation}
+\mathbf{y}=\mathbf{x\beta}+\mathbf{\varepsilon},\label{VAR (Vec)}
+\end{equation}
+where $\mathbf{y}=vec\left(\mathbf{Y}\right)$ is $\left(nk\times1\right)$,
+$\mathbf{x}=\mathbf{I}_{k}\otimes\mathbf{X}$ is $\left(nk\times kq\right)$,
+$\mathbf{\beta}=vec\left(\mathbf{B}\right)$ is $\left(kq\times1\right)$,
+and $\mathbf{\varepsilon}=vec\left(\mathbf{E}\right)$\ is $\left(nk\times1\right)$.
+A modification can now be applied to (\ref{VAR (Vec)}) in order to
+impose linear, specifically zero, constraints that will lead to a
+subset VAR model, see \citet[Chap.~5.2]{Luetk:1993}. Specifically
+$\mathbf{\beta}$ is constrained such that
+\begin{equation}
+\mathbf{\beta}=\mathbf{R\gamma},\label{Constrained Beta}
+\end{equation}
+where $\mathbf{R}$\ is the $\left(kq\times l\right)$ matrix through
+which the zero constraints are imposed, and $l$ is the number of
+unconstrained elements of $\mathbf{\beta}$. This leads to the final
+form of the subset VAR
+\begin{equation}
+\mathbf{y}=\mathbf{x}^{\ast}\mathbf{\gamma}+\mathbf{\varepsilon},\label{Subset VAR (Vec)}
+\end{equation}
+where $\mathbf{x}^{\ast}=\mathbf{xR}$.
+
+
+\section{Maximum Likelihood (ML) Estimation}
+
+Here it is assumed that the errors are normally distributed, that
+is
+\[
+\mathbf{\varepsilon}\thicksim N_{nk}\left(\mathbf{0},\Omega\right),
+\]
+where $\Omega=\Sigma\otimes\mathbf{I}_{n}$. Therefore, the probability
+density function (pdf) of $\mathbf{\varepsilon}$\ is
+\begin{eqnarray}
+f\left(\mathbf{\varepsilon}\right) & = & \frac{1}{\left(2\pi\right)^{nk/2}\left\vert \Omega\right\vert ^{1/2}}\exp\left[-\frac{1}{2}\mathbf{\varepsilon}^{\prime}\Omega^{-1}\mathbf{\varepsilon}\right]\nonumber \\
+ & = & \frac{1}{\left(2\pi\right)^{nk/2}\left\vert \Omega\right\vert ^{1/2}}\exp\left[-\frac{1}{2}\left(\mathbf{y}-\mathbf{x}^{\ast}\mathbf{\gamma}\right)^{\prime}\Omega^{-1}\left(\mathbf{y}-\mathbf{x}^{\ast}\mathbf{\gamma}\right)\right].\label{MVN pdf}
+\end{eqnarray}
+\citet[Chap.~5.2]{Luetk:1993} shows that under the assumption of
+normality, the ML estimates are equivalent to the generalized least
+squares (GLS) estimates. These in turn are estimated by the two-stage
+feasible generalized least squares (FGLS), namely
+\begin{equation}
+\widetilde{\mathbf{\gamma}}=\left(\mathbf{x}^{\ast\prime}\widehat{\Omega}\,^{-1}\mathbf{x}^{\ast}\right)^{-1}\mathbf{x}^{\ast\prime}\widehat{\Omega}\,^{-1}\mathbf{y}\label{2S-FGLS Regression Parameters(Gaussian)}
+\end{equation}
+where $\widehat{\Omega}\,=\widehat{\Sigma}\otimes\mathbf{I}_{n}$,
+and the estimator $\widehat{\Sigma}$\ is obtained from the least
+squares (LS) residuals from the saturated or the subset model, \citet{Hamil:1994}.
+The variance can then be estimated as
+\begin{equation}
+\widetilde{\Sigma}=\frac{\widetilde{\mathbf{E}}^{\prime}\widetilde{\mathbf{E}}}{n},\label{2S-FGLS Variance (Gaussian)}
+\end{equation}
+where $\widetilde{\mathbf{E}}$\ is the FGLS error matrix formed
+by reshaping
+\[
+\widetilde{\mathbf{e}}=\mathbf{y}-\mathbf{x}^{\ast}\widetilde{\mathbf{\gamma}}.
+\]
+
+
+So the steps to complete the two-stage FGLS Gaussian ML estimation
+are:
+\begin{enumerate}
+\item Calculate the LS fit.
+
+\begin{enumerate}
+\item Calculate either $\widehat{\mathbf{\beta}}=\left(\mathbf{x}^{\prime}\mathbf{x}\right)^{-1}\mathbf{x}^{\prime}\mathbf{y}$
+for the saturated model, or $\widehat{\mathbf{\gamma}}=\left(\mathbf{x}^{\ast\prime}\mathbf{x}^{\ast}\right)^{-1}\mathbf{x}^{\ast\prime}\mathbf{y}$\ for
+the subset model.
+\item Reshape $\widehat{\mathbf{\beta}}$\ or $\widehat{\mathbf{\gamma}}$
+to give $\widehat{\mathbf{B}}$.
+\item Calculate $\widehat{\Omega}\,=\widehat{\Sigma}\otimes\mathbf{I}_{n}$,\ where
+$\widehat{\Sigma}=\frac{\left(\mathbf{Y}-\mathbf{X}\widehat{\mathbf{B}}\right)^{\prime}\left(\mathbf{Y}-\mathbf{X}\widehat{\mathbf{B}}\right)}{n}$. 
+\end{enumerate}
+\item Calculate the GLS fit.
+
+\begin{enumerate}
+\item Calculate $\widetilde{\mathbf{\gamma}}=\left(\mathbf{x}^{\ast\prime}\widehat{\Omega}\,^{-1}\mathbf{x}^{\ast}\right)^{-1}\mathbf{x}^{\ast\prime}\widehat{\Omega}\,^{-1}\mathbf{y}$.
+\item Calculate $\widetilde{\Sigma}=\frac{\left(\mathbf{Y}-\mathbf{X}\widetilde{\mathbf{B}}\right)^{\prime}\left(\mathbf{Y}-\mathbf{X}\widetilde{\mathbf{B}}\right)}{n}$. 
+\end{enumerate}
+\end{enumerate}
+By defining the $\left(l+k\left(k+1\right)/2\right)$-vector $\widetilde{\theta}\equiv\left(\widetilde{\mathbf{\gamma}}^{\prime},vech\left(\widetilde{\Sigma}\right)^{\prime}\right)^{\prime}$,
+the inverse Fisher information matrix is given by
+\begin{equation}
+\mathcal{F}^{-1}\left(\widetilde{\theta}\right)=\left[\begin{array}{cc}
+\mathbf{cov}\left(\widetilde{\mathbf{\gamma}}\right) & \mathbf{0}\\
+\mathbf{0} & \frac{2}{n}\mathbf{D}_{p}^{+}\left(\widetilde{\Sigma}\otimes\widetilde{\Sigma}\right)\mathbf{D}_{p}^{+\prime}
+\end{array}\right],\label{Normal IFIM}
+\end{equation}
+where $\mathbf{D}_{p}^{+}$ is the Moore-Penrose inverse of the duplication
+matrix $\mathbf{D}_{p}$, and $\mathbf{cov}\left(\widetilde{\mathbf{\gamma}}\right)=\left(\mathbf{x}^{\ast\prime}\Omega\,^{-1}\mathbf{x}^{\ast}\right)^{-1}$
+is the asymptotic covariance matrix of the subset VAR coefficients.
+
+When a portfolio of subset VAR models are considered, the log-likelhood
+is calculated at the FGLS estimates for each of the $M$ subset models
+which leads to the following
+\begin{eqnarray}
+\log L\left(\widetilde{\theta}_{m}\right) & = & -\frac{nk}{2}\log\left(2\pi\right)-\frac{n}{2}\log\left\vert \widetilde{\Sigma}_{m}\right\vert \nonumber \\
+ &  & -\frac{1}{2}\left(\mathbf{y}-\mathbf{x}_{m}^{\ast}\widetilde{\mathbf{\gamma}}_{m}\right)^{\prime}\left(\widetilde{\Sigma}_{m}^{-1}\otimes\mathbf{I}_{n}\right)\left(\mathbf{y}-\mathbf{x}_{m}^{\ast}\widetilde{\mathbf{\gamma}}_{m}\right)\nonumber \\
+ & = & -\frac{nk}{2}\log\left(2\pi\right)-\frac{n}{2}\log\left\vert \widetilde{\Sigma}_{m}\right\vert -\frac{nk}{2}.\label{Normal logLikelihood}
+\end{eqnarray}
+Also $\widetilde{\theta}_{m}\equiv\left(\widetilde{\mathbf{\gamma}}_{m}^{\prime},vech\left(\widetilde{\Sigma}_{m}\right)^{\prime}\right)^{\prime}$
+is the $r_{m}\equiv\left(l_{m}+k\left(k+1\right)/2\right)$-vector
+of FGLS estimates of the parameters in the $m^{\text{th}}$ subset
+VAR model with the $\mathbf{x}_{m}^{\ast}$ predictor matrix.
+
+
+\section{Model Selection}
+
+Using the results from (\ref{Normal logLikelihood}), the Information
+Criteria can be calculated.
+
+
+\subsubsection{AIC}
+
+\begin{eqnarray*}
+AIC\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+2r_{m}\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +2\left(l_{m}+k\left(k+1\right)/2\right).
+\end{eqnarray*}
+
+
+
+\subsubsection{SBC}
+
+\begin{eqnarray*}
+SBC\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\log\left(n\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\log\left(n\right).
+\end{eqnarray*}
+
+
+
+\subsubsection{HQ}
+
+\begin{eqnarray*}
+HQ\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\log\log\left(n\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\log\log\left(n\right).
+\end{eqnarray*}
+
+
+
+\subsubsection{AIC$_{\text{C}}$}
+
+\begin{eqnarray*}
+AIC_{C_{A}}\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+2\frac{r_{m}}{n-r_{m}-1}\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +2\frac{\left(l_{m}+k\left(k+1\right)/2\right)}{n-\left(l_{m}+k\left(k+1\right)/2\right)-1}
+\end{eqnarray*}
+
+
+\begin{eqnarray*}
+AIC_{C_{B}}\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+2\frac{r_{m}}{n-r_{m}-(k+1)/2}\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +2\frac{\left(l_{m}+k\left(k+1\right)/2\right)}{n-\left(l_{m}+k\left(k+1\right)/2\right)-\left(k+1\right)/2}
+\end{eqnarray*}
+
+
+
+\subsubsection{CAIC}
+
+\begin{eqnarray*}
+CAIC\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\left(\log\left(n\right)+1\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\left(\log\left(n\right)+1\right)
+\end{eqnarray*}
+
+
+
+\subsubsection{CAICF}
+
+\begin{eqnarray*}
+CAICF\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\left(\log\left(n\right)+2\right)+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert 
+\end{eqnarray*}
+
+
+
+\subsubsection{CAICF$_{\text{E}}$}
+
+\begin{eqnarray*}
+CAICF_{E}\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \\
+ &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\left(\log\left(n\right)+2\right)+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \\
+ &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right)
+\end{eqnarray*}
+
+
+
+\subsubsection{CAICF$_{\text{C}}$}
+
+\begin{eqnarray*}
+CAICF_{C}\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \\
+ &  & +2\left(\frac{nr_{m}}{n-r_{m}-2}\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\left(\log\left(n\right)+2\right)+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \\
+ &  & +2\left(\frac{nr_{m}}{n-r_{m}-2}\right)
+\end{eqnarray*}
+
+
+
+\subsubsection{GAIC}
+
+\begin{eqnarray*}
+GAIC\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right)
+\end{eqnarray*}
+
+
+
+\subsubsection{ICOMP}
+
+\[
+ICOMP\left(m\right)=-2\log L\left(\widetilde{\theta}_{m}\right)+2C_{1}\left(\hat{\mathcal{F}}^{-1}\left(\widetilde{\theta}_{m}\right)\right),
+\]
+where
+\[
+\hat{\mathcal{F}}^{-1}\left(\widetilde{\theta}_{m}\right)=\left[\begin{array}{cc}
+\widehat{\mathbf{cov}}\left(\widetilde{\mathbf{\gamma}}_{m}\right) & \mathbf{0}\\
+\mathbf{0} & \frac{2}{n}\mathbf{D}_{p}^{+}\left(\widetilde{\Sigma}_{m}\otimes\widetilde{\Sigma}_{m}\right)\mathbf{D}_{p}^{+\prime}
+\end{array}\right],
+\]
+and $\widehat{\mathbf{cov}}\left(\widetilde{\mathbf{\gamma}}_{m}\right)$
+is a consistent estimator of the asymptotic covariance matrix of the
+subset VAR coefficients. \citet{Bea:Boz:1998} show that ICOMP can
+be expressed as
+\begin{eqnarray*}
+ICOMP\left(m\right) & = & nk\left(\log\left(2\pi\right)+1\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert \\
+ &  & +r_{m}\log\left(\frac{tr\left(\widehat{\mathbf{cov}}\left(\widetilde{\mathbf{\gamma}}_{m}\right)\right)+\frac{1}{2n}G_{m}}{r_{m}}\right)\\
+ &  & -\log\left\vert \widehat{\mathbf{cov}}\left(\widetilde{\mathbf{\gamma}}_{m}\right)\right\vert -k\log\left(2\right)+\frac{k\left(k+1\right)}{2}\log\left(n\right)\\
+ &  & -\left(k+1\right)\log\left\vert \widetilde{\Sigma}_{m}\right\vert 
+\end{eqnarray*}
+where
+\[
+G_{m}\equiv tr\left(\widetilde{\Sigma}_{m}^{2}\right)+\left(tr\left(\widetilde{\Sigma}_{m}\right)\right)^{2}+2\sum_{i=1}^{k}\widetilde{\sigma}_{i,m}^{2}
+\]
+and $\widetilde{\sigma}_{i,m}^{2}$ is the $i^{\text{th}}$ diagonal
+element of $\widetilde{\Sigma}_{m}$.
+
+
+\subsubsection{BMS}
+
+\begin{eqnarray*}
+BMS\left(m\right) & = & -2\log L\left(\widetilde{\theta}_{m}\right)+r_{m}\log n+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right)\\
+ & = & nk\log\left(2\pi\right)+n\log\left\vert \widetilde{\Sigma}_{m}\right\vert +nk\\
+ &  & +\left(l_{m}+k\left(k+1\right)/2\right)\log n\\
+ &  & +\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right)
+\end{eqnarray*}
+

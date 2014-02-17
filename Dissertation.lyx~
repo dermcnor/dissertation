@@ -4,9 +4,9 @@
 \begin_header
 \textclass utthesis
 \begin_preamble
-\title{Adaptive Multivariate Time Series Modeling}
+\title{Adaptive Data Mining}
 \author{Derek McCrae Norton}
-\copyrightYear{2011}
+\copyrightYear{2013}
 \graduationMonth{August}
 \majorProfessor{Hamparsum Bozdogan}
 \keywords{List, Of, Keywords}
@@ -67,6 +67,15 @@ knitr
 \paperfontsize default
 \spacing single
 \use_hyperref false
+\pdf_bookmarks false
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 2
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
 \papersize default
 \use_geometry false
 \use_amsmath 1
@@ -78,13 +87,13 @@ knitr
 \use_indices false
 \paperorientation portrait
 \suppress_date false
-\use_refstyle 1
+\use_refstyle 0
 \index Index
 \shortcut idx
 \color #008000
 \end_index
-\secnumdepth 3
-\tocdepth 3
+\secnumdepth 2
+\tocdepth 1
 \paragraph_separation indent
 \paragraph_indentation default
 \quotes_language english
@@ -182,12 +191,24 @@ addToPDFBookmarks{1}{Dedication}{b} % add a pdf bookmark to the dedication
  page
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
 
-\backslash
-include{front-matter/dedication} % include the dedication
 \end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "front-matter/dedication.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -197,12 +218,24 @@ addToPDFBookmarks{1}{Acknowledgements}{c} % add a pdf bookmark to the acknowledg
 ements page
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
 
-\backslash
-include{front-matter/acknowledgements} % include the acknowledgements
 \end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "front-matter/acknowledgements.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -211,12 +244,24 @@ include{front-matter/acknowledgements} % include the acknowledgements
 addToPDFBookmarks{1}{Quote}{d} % add a pdf bookmark to the quotation page
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
 
 
-\backslash
-include{front-matter/quote} % include a quote
 \end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "front-matter/quote.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
@@ -225,21 +270,15 @@ include{front-matter/quote} % include a quote
 addToPDFBookmarks{1}{Abstract}{e} % add a pdf bookmark to the abstract page
 \end_layout
 
-\begin_layout Plain Layout
-
-
-\backslash
-include{front-matter/abstract} % your abstract
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset toc
-LatexCommand tableofcontents
+\begin_inset CommandInset include
+LatexCommand include
+filename "front-matter/abstract.lyx"
 
 \end_inset
 
@@ -305,6 +344,13 @@ printnomenclature[1.25in] % OPTIONAL
 
 
 \backslash
+include{front-matter/nomenclature.tex} % your abstract
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
 newpage
 \end_layout
 
@@ -322,15 +368,21 @@ pagenumbering{arabic}
 setcounter{page}{1}
 \end_layout
 
+\begin_layout Plain Layout
+
+
+\backslash
+addToPDFBookmarks{-1}{Table of Contents}{h}
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand include
-filename "front-matter/nomenclature.tex"
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
 
 \end_inset
 
@@ -338,13 +390,13 @@ filename "front-matter/nomenclature.tex"
 \end_layout
 
 \begin_layout Part
-Time Series
+Adaptive Multivariate Time Series Modeling
 \end_layout
 
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "parts/chapters-1/chapter-1.lyx"
+filename "part-1/chapter-1.lyx"
 
 \end_inset
 
@@ -354,7 +406,7 @@ filename "parts/chapters-1/chapter-1.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "parts/chapters-1/chapter-2.lyx"
+filename "part-1/chapter-2.lyx"
 
 \end_inset
 
@@ -364,7 +416,24 @@ filename "parts/chapters-1/chapter-2.lyx"
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "parts/chapters-1/chapter-3.lyx"
+filename "part-1/chapter-3.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "part-1/chapter-4.lyx"
+
+\end_inset
+
+
+\begin_inset CommandInset include
+LatexCommand include
+filename "part-1/chapter-5.lyx"
 
 \end_inset
 
@@ -372,7 +441,53 @@ filename "parts/chapters-1/chapter-3.lyx"
 \end_layout
 
 \begin_layout Part
-Text Mining
+Adaptive Text Mining
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "part-2/chapter-1.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "part-2/chapter-2.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "part-2/chapter-3.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addToTOC{Bibliography}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -405,7 +520,7 @@ addToTOC{Vita}
 \begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand include
-filename "back-matter/vita.tex"
+filename "back-matter/vita.lyx"
 
 \end_inset
 

@@ -1,0 +1,177 @@
+\batchmode
+\makeatletter
+\def\input@path{{\string"C:/Users/Derek Norton/Documents/GitHub/dissertation/\string"/}}
+\makeatother
+\documentclass[english,dissertation,letterpaper,12pt]{utthesis}\usepackage{graphicx, color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
+\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
+\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
+\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
+\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
+\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
+\newcommand{\hlslot}[1]{\textit{#1}}%
+\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[authoryear]{natbib}
+\usepackage{nomencl}
+% the following is useful when we have the old nomencl.sty package
+\providecommand{\printnomenclature}{\printglossary}
+\providecommand{\makenomenclature}{\makeglossary}
+\makenomenclature
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\title{Adaptive Data Mining}
+\author{Derek McCrae Norton}
+\copyrightYear{2013}
+\graduationMonth{August}
+\majorProfessor{Hamparsum Bozdogan}
+\keywords{List, Of, Keywords}
+\viceProvost{Carolyn R. Hodges}
+\major{Statistics}
+\degree{Doctor of Philosophy}
+\college{Business}
+\dept{Statistics, Operations, Management Science}
+\university{The University
+of Tennessee, Knoxville}
+\numberOfCommitteeMembers{2}
+\committeeMemberA {Hamparsum Bozdogan}
+\committeeMemberB {Committee Member 2}
+\committeeMemberC {Committee Member 3}
+\committeeMemberD {Committee Member 4}
+\committeeMemberE {Committee Member 5}
+
+\usepackage{nomencl}    % produces a nomenclature
+\usepackage{graphicx}	% graphics package
+\graphicspath{ {figures/}{figures/eps/}{figures/pdf/} } % specify the path where figures are located
+\usepackage{fancyhdr}  % fancy headers and footers
+\usepackage{url}  % nicely format url breaks
+\usepackage{relsize}  % font sizing hierarchy
+\usepackage{booktabs}  % professional looking tables
+\usepackage[config, labelfont={bf}]{caption,subfig}  % nice sub figures
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\pagenumbering{alph} % this is needed to clear certain issues with the hyperref package
+\makeApprovalPage % make the approval page - this is the page that needs to be signed & returned to the thesis/dissertation consultant
+\makeETDApprovalPage % make the Electronic Thesis & Dissertation page - this page is kept with the electronic copy
+\addToPDFBookmarks{0}{Front Matter}{rootNode} % create a root node named "Front Matter" in the pdf bookmarks
+\addToPDFBookmarks{1}{Title}{a} % add a pdf bookmark to the title page
+\makeTitlePage % make the title page. Make sure you properly set the \docType
+\pagenumbering{roman}
+\setcounter{page}{2}
+\makeCopyrightPage % make the copyright page
+\addToPDFBookmarks{1}{Dedication}{b} % add a pdf bookmark to the dedication page
+\include{front-matter/dedication} % include the dedication
+\addToPDFBookmarks{1}{Acknowledgements}{c} % add a pdf bookmark to the acknowledgements page
+\include{front-matter/acknowledgements} % include the acknowledgements
+\addToPDFBookmarks{1}{Quote}{d} % add a pdf bookmark to the quotation page
+\include{front-matter/quote} % include a quote
+\addToPDFBookmarks{1}{Abstract}{e} % add a pdf bookmark to the abstract page
+\include{front-matter/abstract} % your abstract
+
+\tableofcontents{}
+
+\addToTOC{List of Tables} % this will add the list of tables to the Table of Contents (TOC)
+\listoftables % generate a list of tables     %
+\addToTOC{List of Figures} % this will add the list of figures to the Table of Contents (TOC)
+\listoffigures % generate a list of figures     %
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\printnomenclature{}
+
+\include{0C__Users_Derek_Norton_Documents_GitHub_dissertation_front-matter_nomenclature}
+
+
+\part{Adaptive Multivariate Time Series Modeling}
+
+\include{10C__Users_Derek_Norton_Documents_GitHub_dissertation_parts_chapters-1_chapter-1}
+
+\include{11C__Users_Derek_Norton_Documents_GitHub_dissertation_parts_chapters-1_chapter-2}
+
+\include{12C__Users_Derek_Norton_Documents_GitHub_dissertation_parts_chapters-1_chapter-3}
+
+\include{13C__Users_Derek_Norton_Documents_GitHub_dissertation_parts_chapters-1_chapter-4}\include{14C__Users_Derek_Norton_Documents_GitHub_dissertation_parts_chapters-1_chapter-5}
+
+
+\part{Adaptive Text Mining}
+
+\include{15C__Users_Derek_Norton_Documents_GitHub_dissertation_parts_chapters-2_chapter-1}
+
+\include{16C__Users_Derek_Norton_Documents_GitHub_dissertation_parts_chapters-2_chapter-2}
+
+\include{17C__Users_Derek_Norton_Documents_GitHub_dissertation_parts_chapters-2_chapter-3}
+
+\bibliographystyle{plainnat}
+\bibliography{18C__Users_Derek_Norton_Documents_GitHub_dissertation_references_VectorAutoregression,references/references-dissertation}
+
+
+\addToTOC{Vita}
+
+\include{9C__Users_Derek_Norton_Documents_GitHub_dissertation_back-matter_vita}
+\end{document}

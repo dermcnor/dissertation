@@ -1,0 +1,423 @@
+
+\chapter{Model Selection Techniques}
+
+Model selection should be viewed as the unification of two distinct
+parts. The first part is the act of subsetting the data. Specifically,
+this is the means through which various candidate models are fit.
+The second part involves scoring the candidate models, which gives
+an overall rank to the fitness of each model with respect to the other
+models.
+
+Although there are only two seemingly trivial parts, subsetting and
+scoring, that is not to say that the process is trivial. On the contrary,
+there are a plethora of choices for how to complete both the subsetting
+and scoring parts, and each part is not as trivial as it may first
+seem. Also, the entire process can be made considerably more complex
+if ones interest lies not only in what variables to include in the
+model, but also in other factors such as distributional assumptions,
+methods of estimation, or possibly different model types all together.
+
+
+\section{Information Criteria}
+
+Information criteria are the means through which possible candidate
+models can be scored. The discussion here will be limited to criteria
+that consist of two parts, which are the lack of fit between the chosen
+model and the data at hand, and a function which penalizes the first
+part. In general the first part, or lack of fit, is measured by the
+likelihood function. This gives a measure of how likely a model is
+given the data at hand. The second part, or the penalty term, is chosen
+differently for different criteria, and will be described in detail
+in the following sections. As a lead in to all of the following criteria,
+consider
+\begin{equation}
+y=y_{1},y_{2},\ldots,y_{n}\label{random sample}
+\end{equation}
+to be a random sample from some process. The underlying data generating
+process, which is unknown, is denoted $f_{\ast}$. A given candidate
+model will be written as $f_{m}$, where $m=1,\ldots,M$, and $M$
+is the number of models entertained. For a more thorough discussion
+of these techniques see \citet{Bozd:1987,Bozd:2000} for example.
+
+
+\subsection{AIC}
+
+Probably the best known and widely used of information criteria is
+Akaike's Information Criterion (AIC). Originally set forth in \citet{Akaike:1974,Akaike:1973},
+AIC has been almost universally accepted as a model selection criteria.
+The central argument put forth by Akaike is that the model that fits
+the data the best is the model that minimizes the Kullback-Leibler
+(K-L) information from \citet{Kull:Leib:1951}. The K-L information
+measures how well the candidate model, $f_{m}$, approximates the
+true model, $f_{\ast}$, and is given by
+\begin{eqnarray}
+I\left(f^{\ast},f_{m}\right) & = & E_{\ast}\left[\log\left(f_{\ast}\right)-\log\left(f_{m}\right)\right]\label{K-L Divergence}\\
+ & = & E_{\ast}\left[\log\left(f_{\ast}\right)\right]-E_{\ast}\left[\log\left(f_{m}\right)\right]\nonumber \\
+ & = & H\left(f_{\ast};f_{\ast}\right)-H\left(f_{\ast};f_{m}\right)\nonumber 
+\end{eqnarray}
+where $E_{\ast}$ is the expectation with respect to the true model
+$f_{\ast}$. $H\left(f_{\ast};f_{\ast}\right)\equiv H\left(f_{\ast}\right)$
+is a constant in (\ref{K-L Divergence}), so only the cross-entropy
+\begin{equation}
+H\left(f_{\ast};f_{m}\right)=E_{\ast}\left[\log\left(f_{m}\right)\right]\label{Cross Entropy}
+\end{equation}
+needs estimation. One possible estimator for (\ref{Cross Entropy})
+is $\log L\left(\hat{\theta}_{m}\right)$, the maximized log likelihood
+function using the maximum likelihood estimate (MLE), $\hat{\theta}_{m}$,
+for the model parameters $\theta$. This is often an overly optimistic
+estimate of (\ref{Cross Entropy}), due to the fact that the data
+from (\ref{random sample}) is used to estimate both the model parameters
+and the cross-entropy. It can be shown that this estimation bias is
+equal to $nb$, \citet{Koni:Kita:1996}. \ Akaike made the assumptions
+that the model would be estimated using maximum likelihood, and that
+the underlying data generating process is included in the candidate
+models. With these assumptions, Akaike shows that the bias, $nb$,
+is approximately equal to the number of parameters in the model. This
+leads to an unbiased estimator of (\ref{Cross Entropy}), namely
+\begin{equation}
+AIC=-2\log L\left(\hat{\theta}_{m}\right)+2r,\label{AIC}
+\end{equation}
+where $r$ is the number of parameters estimated in the candidate
+model. Thus, AIC is calculated for all candidate model and the minimum
+over all models is chosen as the best fitting.
+
+
+\subsection{SBC / BIC / MDL}
+
+Interestingly, \citet{Schw:1978}, \citet{Akaike:1978}, \citet{Riss:1978}
+and all followed very different derivations, yet still came up with
+the same criterion. \citet{Schw:1978} and \citet{Akaike:1978} both
+used a Bayesian derivation, while \citet{Riss:1978} based his derivation
+on the information theoretic minimum code length for the data along
+with the model parameters. Due to the similarities within Scwharz's
+Bayesian Criterion (SBC), Akaike's Bayesian Information Criterion
+(BIC), and Rissanen's Minimum Description Length (MDL), the term SBC
+will be used consistently throughout this work, and the form of this
+criterion is given by
+\begin{equation}
+SBC=-2\log L\left(\hat{\theta}_{m}\right)+r\log\left(n\right).\label{SBC}
+\end{equation}
+This particular criterion, unlike AIC, is consistent. This means that
+if the underlying data generating process is one of the models considered,
+that the criterion will select it with probability approaching one
+as sample size approaches infinity.
+
+
+\subsection{HQ}
+
+Also in an attempt to create a consistent estimator, \citet{Hann:Quin:1979}
+derived a criterion denoted (HQ) based on the law of iterated logarithms.
+The form of this criterion is given by
+\begin{equation}
+HQ=-2\log L\left(\hat{\theta}_{m}\right)+r\log\log\left(n\right).\label{HQ}
+\end{equation}
+This criterion was derived with the hopes to underestimate the order
+of autoregressive models to a lesser degree than SBC, and attempts
+to achieve this through the fact that the second term increases at
+a slower rate than $k\log\left(n\right)$.
+
+
+\subsection{Finite Sample Corrected AIC}
+
+Initially developed by \citet{Sugi:1978} and then used by \citet{Hurv:Tsai:1989},
+$AIC_{C}$ estimates the exact value of the bias, $b$, from estimating
+(\ref{Cross Entropy}) in the multiple regression case leading to
+\begin{equation}
+AIC_{C_{A}}=-2\log L\left(\hat{\theta}_{m}\right)+2\left(\frac{nr}{n-r-1}\right).\label{AICc (regression)}
+\end{equation}
+Though useful in small sample situations, the bias should be estimated
+for the model at hand. \citet{Hurv:Tsai:1993} estimate the bias specifically
+for VAR models leading to
+\begin{equation}
+AIC_{C_{B}}=-2\log L\left(\hat{\theta}_{m}\right)+2\left(\frac{nr}{n-r-\frac{k+1}{2}}\right)\label{AICc VAR}
+\end{equation}
+
+
+
+\subsection{Consistent AIC}
+
+In an attempt to yield a consistent estimator, \citet{Bozd:1987}
+follows the derivation of \citet{Akaike:1973} and adds the thought
+that when testing a null hypothesis versus an alternative hypothesis
+using a parameter, the degrees of freedom is an increasing function
+of the sample size if the test statistic follows a noncentral chi-squared
+distribution. With that thought in mind, \citet{Bozd:1987} derived
+an adjustment to AIC which reflects a dependence on the sample size.
+Namely
+\begin{equation}
+CAIC=-2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+1\right].\label{CAIC}
+\end{equation}
+
+
+
+\subsection{Consistent AIC with Fisher Information}
+
+Exploiting the large sample asymptotic distributional properties of
+the MLE, \citet{Bozd:1987} proposes another consistent information
+criterion which penalizes overparameterization strongly, especially
+for large sample sizes. This criterion is defined as
+\begin{equation}
+CAICF=-2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert .\label{CAICF}
+\end{equation}
+This criteria was further extended in \citet{Bozd:Ueno:2000} in the
+bayesian framework to
+\begin{eqnarray}
+CAICF_{E} & = & -2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
+ &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right),\label{CAICF_E}
+\end{eqnarray}
+which includes $AIC$, $GAIC$, $SBC$, and $CAICF$ as special cases.
+The $CAICF_{E}$ penalizes overparameterization more harshly than
+the $CAICF$. One further step taken in \citet{Bozd:Ueno:2000}, is
+to approximate the last term of $CAICF_{E}$ to correct for the bias
+of small sample size. This approximation leads to
+\begin{eqnarray}
+CAICF_{C} & \cong & -2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
+ &  & +2\left(\frac{nr}{n-r-2}\right).\label{CAICF_C}
+\end{eqnarray}
+
+
+
+\subsection{Generalized AIC}
+
+A generalization of AIC attempts to determine the penalty term in
+(\ref{AIC}) differently for different models and data sets. This
+is accomplished by replacing $k$, the number of parameters, with
+an adaptive value leading to
+\begin{equation}
+GAIC=-2\log L\left(\hat{\theta}_{m}\right)+2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right),\label{GAIC}
+\end{equation}
+where $\hat{\mathcal{F\,}}^{-1}$ is the estimated Inverse Fisher
+Information Matrix (IFIM) in inner product form, and $\hat{R}$ is
+the estimated Fisher information matrix in outer product form. The
+penalty term, $tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right)$, reduces
+to $r$, the number of parameters, if the estimated model is the actual
+model, and if certain regularity conditions hold. For more information,
+see \citet{Take:1976} for example.
+
+
+\subsection{Information Complexity}
+
+Information Complexity (ICOMP) is a novel approach to the development
+of an information criterion formulated by \citet{Bozd:1988,Bozd:1990}.
+ICOMP aims to select models with a form similar to other information
+criteria, i.e. with a penalized likelihood; however this is where
+the similarity ends. Instead of penalty terms based on sample size
+or number of parameters, ICOMP penalizes the likelihood based on a
+measure of covariance complexity. For an in depth look at this measure
+of complexity, the reader is referred to \citet{vanEmden:1971} or
+\citet{Bozd:1990}. For the purposes here, let $C\left(\cdot\right)$
+be a real-valued measure of complexity of a system. There are various
+measures of complexity, such as the $C_{0}\left(\cdot\right)$ measure
+of complexity of \citet{vanEmden:1971}, however the focus here is
+the $C_{1}\left(\cdot\right)$ measure of complexity, where
+\begin{equation}
+C_{1}\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)=\frac{k}{2}\log\left(\frac{tr\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)}{k}\right)-\frac{1}{2}\log\left\vert \mathbf{cov}\left(\hat{\theta}_{m}\right)\right\vert .\label{C_1 Complexity}
+\end{equation}
+Rewritten as
+\[
+C_{1}\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)=\frac{1}{2}\log\frac{\left(\frac{tr\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)}{k}\right)^{k}}{\left\vert \mathbf{cov}\left(\hat{\theta}_{m}\right)\right\vert },
+\]
+(\ref{C_1 Complexity}) can be interpreted as a trade-off between
+the geometric mean of the average total variation of the parameters
+and the generalized variance of the parameters. From this measure
+of complexity, a general form of ICOMP is defined as
+\begin{equation}
+ICOMP\left(m\right)=-2\log L\left(\hat{\theta}_{m}\right)+2C_{1}\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right).\label{ICOMP}
+\end{equation}
+
+
+The issue now becomes, how to estimate $\mathbf{cov}\left(\hat{\theta}_{m}\right)$
+in practice. \citet{Bea:Boz:2000} argue that when the parametric
+family of probability models, $f_{m}$, is correctly specified,
+\[
+\mathbf{cov}\left(\theta_{m}^{ML}\right)\thickapprox\mathcal{F}^{-1}\left(\theta_{m}^{ML}\right),
+\]
+where $\mathcal{F}^{-1}\left(\theta_{m}^{ML}\right)$ is the inverse
+Fisher information matrix (IFIM). This leads to the ICOMP(IFIM) criterion
+\begin{equation}
+ICOMP\left(IFIM\right)=-2\log L\left(\hat{\theta}_{m}\right)+2C_{1}\left(\hat{\mathcal{F}}^{-1}\left(\hat{\theta}_{m}\right)\right)\label{ICOMP(IFIM)}
+\end{equation}
+where $\hat{\mathcal{F}}^{-1}\left(\hat{\theta}_{m}\right)$ is the
+estimated Fisher information matrix, as seen in (\ref{GAIC}), based
+on the maximum likelihood estimates.
+
+
+\subsection{Bayesian Model Selection Criteria}
+
+\citet{Bozd:Ueno:2000} derive a models selection criteria in the
+bayesian framework as follows:
+\begin{eqnarray}
+BMS & = & -2\log L\left(\hat{\theta}_{m}\right)-2\log\pi\left(\hat{\theta}_{m}\right)+r\log n+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
+ &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right).\label{BMS1}
+\end{eqnarray}
+If a constant prior is assumed, (\ref{BMS1}) reduces to:
+\[
+BMS=-2\log L\left(\hat{\theta}_{m}\right)+r\log n+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right).
+\]
+
+
+
+\section{Genetic Algorithm}
+
+Initially developed by \citet{Holland:1975}, the Genetic Algorithm
+(GA) is an extension of research into evolutionary algorithms. The
+GA\ allows for a search over the entire sample space, i.e. not local,
+without the need for testing all subsets. The GA is particularly useful
+when the function to be optimized is not smooth, has multiple optima,
+or has a large number of parameters, which is certainly true in the
+case subset selection. Following the methodology in \citet{Bea:Boz:1998,Bea:Boz:2000}
+and \citet{Bozd:2003}, the genetic algorithm implemented here to
+aid in subset selection is detailed below.
+
+
+\subsection{GA Coding Scheme}
+
+A binary string is used to indicate which combination of predictor
+variables are included in a model. A $1$ indicates that a particular
+variable is included, and a $0$ indicates that the variable is excluded.
+Each string is the same length, namely length $kp+d$, where the number
+of lags, $p$, and the number of deterministic terms, $d$, to be
+examined are determined \textit{a priori}. Using the example in (\ref{3 var, 3 lag example})
+and assuming that we allow for an intercept term for each variable,
+the binary string representing a model will be $kp+d=3\times3+3=12$
+digits long. Specifically, (\ref{3 var, 3 lag example}) is represented
+as
+\[
+\begin{array}{ccc}
+\underbrace{\begin{array}{cccc}
+0\text{ } & 1\text{ } & 1\text{ } & 1\end{array}} & \underbrace{\begin{array}{cccc}
+0\text{ } & 1\text{ } & 1\text{ } & 1\end{array}} & \underbrace{\begin{array}{cccc}
+0\text{ } & 1\text{ } & 1\text{ } & 1\end{array}}\\
+\mathbf{y}_{1} & \mathbf{y}_{2} & \mathbf{y}_{3}
+\end{array},
+\]
+where the $0$'s represent the absence of intercept terms. With this
+method, it is easy to see that the model represented by $111111111111$
+is the saturated model, or that $100010001000$ is the model with
+only an intercept for each variable.
+
+
+\subsection{Initial Population of Models}
+
+To create the first pool of potential breeding pairs, first the population
+size, $N_{GA}$, must be determined. With that determination, $N_{GA}$
+strings are randomly generated to represent the the models in the
+initial population. Of course the size of the initial population,
+as well as a few other parameters related to how the GA explores the
+model space must be chosen by the user. \citet{DeJong:1975} and \citet{Grefen:1986}
+both give some idea for these parameters, $N_{GA}=50-100$ and $N=30$
+respectively; however these parameters are highly dependent on each
+other and the optimization problem at hand.
+
+
+\subsubsection{Fitness Function}
+
+The fitness function what represents the ``survival of the fittest\textquotedblright{}\ in
+the GA. Information criteria attempt to quantify how ``fit\textquotedblright{}
+a particular model is from a statistical standpoint, and as such are
+the logical choice for the fitness function. All of the criteria presented
+in the previous section, are candidates for the fitness function,
+and will be examined for performance in subsequent chapters. Generally,
+the higher the fitness function the better, however with information
+criteria lower is better. This convention will be used throughout.
+
+
+\subsection{Selection for Mating Pool}
+
+The fitness function gives an idea of how fit a potential mate is,
+but there must be a procedure for the selection of mating a mating
+pool and selection of the mating pairs. Two possibilities will be
+considered here, and as with the fitness function will be examined
+for performance in subsequent chapters.
+
+
+\subsubsection{Rank Based Selection}
+
+The first selection procedure is based on the ranking procedure of
+\citet{Baker:1985}. First, the fitness function is computed for all
+$N_{GA}$ models in the parent population. The models are then sorted
+by the fitness function from largest to smallest, so that the worst
+model (i.e. highest criterion value) is ranked $1$ and the best model
+is ranked $N_{GA}$. Then, following the methodology of \citet{Bea:Boz:1998,Bea:Boz:2000},
+a \textquotedbl{}weighted roulette wheel\textquotedbl{} with $N_{GA}$
+bins is created where the bin width for the $i^{th}$ ranked model
+is
+\begin{equation}
+\frac{i}{N_{GA}\left(N_{GA}+1\right)/2}.
+\end{equation}
+$N_{GA}$ draws are then taken from a $Uniform\left(0,1\right)$ distribution,
+and a model is included in the mating pool when one of the random
+numbers falls in that model's bin.
+
+
+\subsubsection{Proportional Selection}
+
+The second selection procedure is a proportional selection detailed
+in \citet{Bozd:2003}. Specifically, after the fitness function ($ff$)
+is calculated for each model, the following difference is calculated
+for each model
+\begin{equation}
+\Delta ff_{i}=ff_{\max}-ff_{i}
+\end{equation}
+for $i=1,\ldots,N_{GA}$. The average of the differences are then
+computed.
+\begin{eqnarray}
+\overline{\Delta ff\,} & = & \frac{1}{N_{GA}}\sum_{i=1}^{N_{GA}}\Delta ff_{i}\nonumber \\
+ & = & \frac{1}{N_{GA}}\sum_{i=1}^{N_{GA}}ff_{\max}-ff_{i}\nonumber \\
+ & = & ff_{\max}-\overline{ff\,}
+\end{eqnarray}
+Then the following ratio
+\begin{equation}
+\frac{\Delta ff_{i}}{\overline{\Delta ff\,}}\label{ff Ratio}
+\end{equation}
+is computed for each model. (\ref{ff Ratio}) is then used to to pick
+the models to be included in the mating pool. With this method, the
+chance of a model being chosen for mating is proportional to (\ref{ff Ratio}).
+One possible drawback to this procedure is that the least fit model,
+i.e. the model with the highest $ff$, has a $\Delta ff_{i}$ of $0$,
+which in turn leads to that model having no chance of being selected
+for mating. \ That shouldn't matter much in later generations, but
+might make quite a difference in early generations.
+
+
+\subsubsection{Boltzmann Selection}
+
+In an attempt to prevent the GA from premature convergence, Boltzmann
+Selection utilizes a continuously varying \textquotedbl{}temperature\textquotedbl{}
+to adjust how quickly the GA converges. In early generations, the
+temperature start high which in turn increases the randomness of mating
+pool selection. As generations proceed, the temperature gradually
+decreases thereby giving more fit models correspondingly larger chance
+of entering the mating pool. For some examples, refer to \citet{Gold:1990}
+or \citet{DeMa:Tid:1991}. Specifically, \citet{DeMa:Tid:1991} shows
+that this method performs better than fitness proportionate selection
+on a small group of problems. Below is one possible choice for the
+temperature function, where $t$ is the generation, $c_{1}$ and $c_{2}$
+are arbitrary constants that control speed of convergence and convergence
+value respectively, and $\sigma_{ff_{t}}^{2}$ is the variance of
+the fitness functions at generation $t$.
+
+\begin{equation}
+T_{t}=\frac{c_{1}\sigma_{ff_{t}}^{2}}{t^{2}}+c_{2}
+\end{equation}
+Using the temperature, the following ratio
+\begin{equation}
+E\left(i,t\right)=\frac{\exp\left(-ff_{i}/T_{t}\right)}{\sum\limits _{i=1}^{n}\exp\left(-ff_{i}/T_{t}\right)}\label{Boltzman Ratio}
+\end{equation}
+is calculated for each model. With this method, the chance of a model
+being chosen for mating is proportional to (\ref{Boltzman Ratio}).
+
+
+\subsection{Mating}
+
+
+\subsection{Mutation}
+
+
+\subsection{Elitism}
+
+First introduced by \citet{DeJong:1975}, elitism forces the GA to
+retain a predetermined number of the \textquotedbl{}best\textquotedbl{}
+models at each generation. This combined with Boltzmann selection
+will allow for a more thorough search of the model space, but will
+guarantee that very fit models early on are not lost.

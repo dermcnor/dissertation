@@ -1,0 +1,143 @@
+
+\chapter{Introduction}
+
+Often an interest in predictions of future values occurs. Sometimes
+these future values are based solely on a single predictor, whether
+that predictor is another variable or simply the lagged variable of
+interest. However, the case is more often a complex interrelationship
+of multiple variables where future values for all variables are of
+interest. Models that adequately describe these complex interrelationships
+are the focus here. Specifically Vector Autoregressive (VAR) models
+are to be considered.
+
+
+\section{Motivations for VAR Models}
+
+Most of the existing literature treats VAR models as the sole dominion
+of economic or financial prediction. This is certainly not unreasonable
+considering the seminal paper by \citet{Sims:1980}. There are, of
+course, some instances in the literature outside of that domain, such
+as \citet{Cres:Ente:1999} and \citet{Free:Will:Lin:1989}. While
+many of the possible applications for VAR models are economic in nature,
+there are certainly abundant non-economic applications. To this end,
+forecasting will be the main focus of this work, with certain topics
+such as cointegration noticeably absent. Cointegration, for example,
+certainly seems justifiable in certain economic applications, but
+is not necessarily as justifiably in other areas of application, and
+certainly not desirable if interpretation or explainability of the
+model and parameters is an issue.
+
+
+\section{VAR Model Specification}
+
+In the univariate case, a simple autoregressive model of order $p$,
+AR$(p)$, can be written as
+\[
+y_{t}=\gamma d+\sum_{i=1}^{p}\phi_{i}y_{t-i}+\varepsilon_{t},
+\]
+where $d$ is a matrix of deterministic terms to represent the intercept,
+linear trend $t$, quadratic trend $t^{2}$, or other terms such as
+seasonal dummies. The multivariate extension, VAR$(p)$, is simply
+\begin{equation}
+\mathbf{y}_{t}=\Gamma D+\sum_{i=1}^{p}\Phi_{i}\mathbf{y}_{t-i}+\varepsilon_{t}.
+\end{equation}
+where $\mathbf{y}_{t}=\left(y_{1t},\ldots,y_{kt}\right)^{\prime}$
+is a $\left(k\times1\right)$ random vector, the $\Phi_{i}$ are fixed
+$\left(k\times k\right)$ coefficient matrices, and $\varepsilon_{t}=\left(\varepsilon_{1t},\ldots,\varepsilon_{kt}\right)^{\prime}$\ is
+the $\left(k\times1\right)$ error vector such that $\varepsilon_{t}\overset{i.i.d.}{\thicksim}\left(0,\Sigma\right)$.
+Here no actual distributional assumptions are made, but that will
+be addressed in subsequent chapters. Again, as in the univariate case
+the first term in the model, $\Gamma D$, is any deterministic terms
+included in the model. The addition of the deterministic term is not
+often seen, but is included here for reasons that will become clear
+in later chapters.
+
+The main goal of the VAR model is a better understanding of underlying
+relationships.\ Whether this understanding is simply to describe
+the relationships between variables or to predict future outcomes,
+it is necessary to achieve a model that is both parsimonious and has
+minimum variance.\ It becomes clear that a fully ranked VAR model
+may not satisfy either condition.
+
+\emph{Example 1.1}.
+
+Consider $\mathbf{y}_{t}$, a matrix of $k=3$ time series variables
+that are hypothesized to depend on $p=3$ lags of previous values.
+\begin{equation}
+\mathbf{y}_{t}=\Phi_{1}\mathbf{y}_{t-1}+\Phi_{2}\mathbf{y}_{t-2}+\Phi_{3}\mathbf{y}_{t-3}+\varepsilon_{t}\label{3 var, 3 lag example}
+\end{equation}
+
+
+This model despite its seeming simplicity is not simple, and can be
+seen if we expand the notation in (\ref{3 var, 3 lag example}) to
+get
+\begin{eqnarray}
+\left[\begin{array}{c}
+\mathbf{y}_{1,t}\\
+\mathbf{y}_{2,t}\\
+\mathbf{y}_{3,t}
+\end{array}\right] & = & \left[\begin{array}{ccc}
+\phi_{1,1,1} & \phi_{1,2,1} & \phi_{1,3,1}\\
+\phi_{2,1,1} & \phi_{2,2,1} & \phi_{2,3,1}\\
+\phi_{3,1,1} & \phi_{3,2,1} & \phi_{3,3,1}
+\end{array}\right]\mathbf{y}_{t-1}+\left[\begin{array}{ccc}
+\phi_{1,1,2} & \phi_{1,2,2} & \phi_{1,3,2}\\
+\phi_{2,1,2} & \phi_{2,2,2} & \phi_{2,3,2}\\
+\phi_{3,1,2} & \phi_{3,2,2} & \phi_{3,3,2}
+\end{array}\right]\mathbf{y}_{t-2}\nonumber \\
+ &  & +\left[\begin{array}{ccc}
+\phi_{1,1,3} & \phi_{1,2,3} & \phi_{1,3,3}\\
+\phi_{2,1,3} & \phi_{2,2,3} & \phi_{2,3,3}\\
+\phi_{3,1,3} & \phi_{3,2,3} & \phi_{3,3,3}
+\end{array}\right]\mathbf{y}_{t-3}+\varepsilon_{t}.\label{3 var, 3 lag expanded}
+\end{eqnarray}
+
+
+Clearly (\ref{3 var, 3 lag expanded}) has quite a few parameters
+to be estimated. Specifically it has $k^{2}\times p=3^{2}\times3=27$
+plus the variance leading to $28$ parameters to estimate. Also this
+does not even include deterministic terms.
+
+
+\section{Motivations for Information Criteria}
+
+To achieve a more parsimonious model and also a lower variance competing
+models must be compared.\ This can be done through a variety of methods,
+but here the focus is the use of information criteria. An information
+criteria allows for the comparison of not only different lag lengths,
+but also subset models of reduced rank. This is highly advantageous
+since it allows for a model with a great deal of flexibility. The
+problem now becomes which criteria to use. There are many options
+to solve this problem, such as Akaike's Information Criterion (AIC),
+Schwarz Bayesian Criterion (SBC), Rissanen's Minimum Description Length
+(MDL), and Bozdogan's Information Complexity (ICOMP) for some examples.
+
+
+\section{Motivations for GA}
+
+In the previous section, the example of a seemingly simple VAR$(3)$
+for $k=3$ variables was introduced. In light of parsimony and minimal
+variance, various competing models could be compared using some form
+of information criteria. However, like the previous example, this
+is not as easy as on might initially consider. To look at all possible
+subsets for the example would require looking at $2^{k^{2}p}-1=2^{27}-1=$
+over $134$ million models. If it took $.5$ seconds to test each
+model, this ``simple\textquotedblright{} task would take over $2$
+years to complete. All possible subsets is the only way to guarantee
+the best model among competing models, but there are other possibilities
+for subsetting. Unfortunately, traditional procedures such as stepwise
+selection do not tend to perform well. This leads to the motivation
+for the use of an improved search algorithm which comes in the form
+of the genetic algorithm (GA). The GA provides a means to search the
+possible subsets and obtain a new optimal model in terms of the information
+criteria.
+
+
+\section{Summary}
+
+The goal of the remainder of this work is to offer valid alternatives
+to the basic VAR model to deal with the so-called ``real world\textquotedblright{}\ data
+that often invalidates many of the normal modeling assumptions. The
+hope is to complete that goal while incorporating the novel combination
+of model selection and the genetic algorithm to lead to appropriate
+models that achieve parsimony and minimal variance.

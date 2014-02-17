@@ -34,7 +34,16 @@ knitr
 \index_command default
 \paperfontsize default
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry false
 \use_amsmath 1
@@ -135,10 +144,7 @@ to be a random sample from some process.
 \end_inset
 
  is the number of models entertained.
-\begin_inset space \space{}
-\end_inset
-
-For a more thorough discussion of these techniques see 
+ For a more thorough discussion of these techniques see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Bozd:1987, Bozd:2000"
@@ -185,8 +191,8 @@ key "Kull:Leib:1951"
 \begin_inset Formula 
 \begin{eqnarray}
 I\left(f^{\ast},f_{m}\right) & = & E_{\ast}\left[\log\left(f_{\ast}\right)-\log\left(f_{m}\right)\right]\label{K-L Divergence}\\
- & = & E_{\ast}\left[\log\left(f_{\ast}\right)\right]-E_{\ast}\left[\log\left(f_{m}\right)\right]\notag\\
- & = & H\left(f_{\ast};f_{\ast}\right)-H\left(f_{\ast};f_{m}\right)\notag
+ & = & E_{\ast}\left[\log\left(f_{\ast}\right)\right]-E_{\ast}\left[\log\left(f_{m}\right)\right]\nonumber \\
+ & = & H\left(f_{\ast};f_{\ast}\right)-H\left(f_{\ast};f_{m}\right)\nonumber 
 \end{eqnarray}
 
 \end_inset
@@ -204,14 +210,14 @@ where
 \begin_inset Formula $H\left(f_{\ast};f_{\ast}\right)\equiv H\left(f_{\ast}\right)$
 \end_inset
 
- is a constant in (
+ is a constant in 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "K-L Divergence"
 
 \end_inset
 
-), so only the cross-entropy
+, so only the cross-entropy
 \begin_inset Formula 
 \begin{equation}
 H\left(f_{\ast};f_{m}\right)=E_{\ast}\left[\log\left(f_{m}\right)\right]\label{Cross Entropy}
@@ -220,14 +226,14 @@ H\left(f_{\ast};f_{m}\right)=E_{\ast}\left[\log\left(f_{m}\right)\right]\label{C
 \end_inset
 
 needs estimation.
- One possible estimator for (
+ One possible estimator for 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "Cross Entropy"
 
 \end_inset
 
-) is 
+ is 
 \begin_inset Formula $\log L\left(\hat{\theta}_{m}\right)$
 \end_inset
 
@@ -241,21 +247,21 @@ reference "Cross Entropy"
 \end_inset
 
 .
- This is often an overly optimistic estimate of (
+ This is often an overly optimistic estimate of 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "Cross Entropy"
 
 \end_inset
 
-), due to the fact that the data from (
+, due to the fact that the data from 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "random sample"
 
 \end_inset
 
-) is used to estimate both the model parameters and the cross-entropy.
+ is used to estimate both the model parameters and the cross-entropy.
  It can be shown that this estimation bias is equal to 
 \begin_inset Formula $nb$
 \end_inset
@@ -280,14 +286,14 @@ Akaike made the assumptions that the model would be estimated using maximum
 \end_inset
 
 , is approximately equal to the number of parameters in the model.
- This leads to an unbiased estimator of (
+ This leads to an unbiased estimator of 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "Cross Entropy"
 
 \end_inset
 
-), namely
+, namely
 \begin_inset Formula 
 \begin{equation}
 AIC=-2\log L\left(\hat{\theta}_{m}\right)+2r,\label{AIC}
@@ -430,14 +436,14 @@ key "Hurv:Tsai:1989"
 \begin_inset Formula $b$
 \end_inset
 
-, from estimating (
+, from estimating 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "Cross Entropy"
 
 \end_inset
 
-) in the multiple regression case leading to
+ in the multiple regression case leading to
 \begin_inset Formula 
 \begin{equation}
 AIC_{C_{A}}=-2\log L\left(\hat{\theta}_{m}\right)+2\left(\frac{nr}{n-r-1}\right).\label{AICc (regression)}
@@ -541,7 +547,7 @@ key "Bozd:Ueno:2000"
  in the bayesian framework to
 \begin_inset Formula 
 \begin{eqnarray}
-CAICF_{E} & = & -2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \notag\\
+CAICF_{E} & = & -2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
  &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right),\label{CAICF_E}
 \end{eqnarray}
 
@@ -588,7 +594,7 @@ key "Bozd:Ueno:2000"
  This approximation leads to
 \begin_inset Formula 
 \begin{eqnarray}
-CAICF_{C} & \cong & -2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \notag\\
+CAICF_{C} & \cong & -2\log L\left(\hat{\theta}_{m}\right)+r\left[\log n+2\right]+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
  &  & +2\left(\frac{nr}{n-r-2}\right).\label{CAICF_C}
 \end{eqnarray}
 
@@ -602,14 +608,14 @@ Generalized AIC
 \end_layout
 
 \begin_layout Standard
-A generalization of AIC attempts to determine the penalty term in (
+A generalization of AIC attempts to determine the penalty term in 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "AIC"
 
 \end_inset
 
-) differently for different models and data sets.
+ differently for different models and data sets.
  This is accomplished by replacing 
 \begin_inset Formula $k$
 \end_inset
@@ -623,7 +629,7 @@ GAIC=-2\log L\left(\hat{\theta}_{m}\right)+2tr\left(\hat{\mathcal{F}}^{-1}\hat{R
 \end_inset
 
 where 
-\begin_inset Formula $\hat{\mathcal{F}}^{-1}$
+\begin_inset Formula $\hat{\mathcal{F\,}}^{-1}$
 \end_inset
 
  is the estimated Inverse Fisher Information Matrix (IFIM) in inner product
@@ -723,14 +729,14 @@ C_{1}\left(\mathbf{cov}\left(\hat{\theta}_{m}\right)\right)=\frac{1}{2}\log\frac
 
 \end_inset
 
-(
+
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "C_1 Complexity"
 
 \end_inset
 
-) can be interpreted as a trade-off between the geometric mean of the average
+ can be interpreted as a trade-off between the geometric mean of the average
  total variation of the parameters and the generalized variance of the parameter
 s.
  From this measure of complexity, a general form of ICOMP is defined as
@@ -786,14 +792,14 @@ where
 \begin_inset Formula $\hat{\mathcal{F}}^{-1}\left(\hat{\theta}_{m}\right)$
 \end_inset
 
- is the estimated Fisher information matrix, as seen in (
+ is the estimated Fisher information matrix, as seen in 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "GAIC"
 
 \end_inset
 
-), based on the maximum likelihood estimates.
+, based on the maximum likelihood estimates.
 \end_layout
 
 \begin_layout Subsection
@@ -810,20 +816,20 @@ key "Bozd:Ueno:2000"
  derive a models selection criteria in the bayesian framework as follows:
 \begin_inset Formula 
 \begin{eqnarray}
-BMS & = & -2\log L\left(\hat{\theta}_{m}\right)-2\log\pi\left(\hat{\theta}_{m}\right)+r\log n+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \notag\\
+BMS & = & -2\log L\left(\hat{\theta}_{m}\right)-2\log\pi\left(\hat{\theta}_{m}\right)+r\log n+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert \nonumber \\
  &  & +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right).\label{BMS1}
 \end{eqnarray}
 
 \end_inset
 
-If a constant prior is assumed, (
+If a constant prior is assumed, 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "BMS1"
 
 \end_inset
 
-) reduces to:
+ reduces to:
 \begin_inset Formula 
 \[
 BMS=-2\log L\left(\hat{\theta}_{m}\right)+r\log n+\log\left\vert \hat{\mathcal{F}}^{-1}\right\vert +2tr\left(\hat{\mathcal{F}}^{-1}\hat{R}\right).
@@ -908,27 +914,27 @@ A binary string is used to indicate which combination of predictor variables
 a priori
 \shape default
 .
- Using the example in (
+ Using the example in 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "3 var, 3 lag example"
 
 \end_inset
 
-) and assuming that we allow for an intercept term for each variable, the
+ and assuming that we allow for an intercept term for each variable, the
  binary string representing a model will be 
 \begin_inset Formula $kp+d=3\times3+3=12$
 \end_inset
 
  digits long.
- Specifically, (
+ Specifically, 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "3 var, 3 lag example"
 
 \end_inset
 
-) is represented as
+ is represented as
 \begin_inset Formula 
 \[
 \begin{array}{ccc}
@@ -1021,12 +1027,8 @@ in the GA.
 \begin_inset Quotes grd
 \end_inset
 
-fit”
-\begin_inset space \space{}
-\end_inset
-
-a particular model is from a statistical standpoint, and as such are the
- logical choice for the fitness function.
+fit” a particular model is from a statistical standpoint, and as such are
+ the logical choice for the fitness function.
  All of the criteria presented in the previous section, are candidates for
  the fitness function, and will be examined for performance in subsequent
  chapters.
@@ -1145,8 +1147,8 @@ for
  The average of the differences are then computed.
 \begin_inset Formula 
 \begin{eqnarray}
-\overline{\Delta ff\,} & = & \frac{1}{N_{GA}}\sum_{i=1}^{N_{GA}}\Delta ff_{i}\notag\\
- & = & \frac{1}{N_{GA}}\sum_{i=1}^{N_{GA}}ff_{\max}-ff_{i}\notag\\
+\overline{\Delta ff\,} & = & \frac{1}{N_{GA}}\sum_{i=1}^{N_{GA}}\Delta ff_{i}\nonumber \\
+ & = & \frac{1}{N_{GA}}\sum_{i=1}^{N_{GA}}ff_{\max}-ff_{i}\nonumber \\
  & = & ff_{\max}-\overline{ff\,}
 \end{eqnarray}
 
@@ -1161,23 +1163,23 @@ Then the following ratio
 \end_inset
 
 is computed for each model.
- (
+ 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "ff Ratio"
 
 \end_inset
 
-) is then used to to pick the models to be included in the mating pool.
+ is then used to to pick the models to be included in the mating pool.
  With this method, the chance of a model being chosen for mating is proportional
- to (
+ to 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "ff Ratio"
 
 \end_inset
 
-).
+.
  One possible drawback to this procedure is that the least fit model, i.e.
  the model with the highest 
 \begin_inset Formula $ff$
@@ -1279,14 +1281,14 @@ E\left(i,t\right)=\frac{\exp\left(-ff_{i}/T_{t}\right)}{\sum\limits _{i=1}^{n}\e
 
 is calculated for each model.
  With this method, the chance of a model being chosen for mating is proportional
- to (
+ to 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand eqref
 reference "Boltzman Ratio"
 
 \end_inset
 
-).
+.
 \end_layout
 
 \begin_layout Subsection

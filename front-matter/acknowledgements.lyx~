@@ -159,11 +159,7 @@ where
 \end_inset
 
 , or other terms such as seasonal dummies.
- 
-\begin_inset space \space{}
-\end_inset
-
-The multivariate extension, VAR
+ The multivariate extension, VAR
 \begin_inset Formula $(p)$
 \end_inset
 
@@ -258,7 +254,7 @@ Consider
  lags of previous values.
 \begin_inset Formula 
 \begin{equation}
-\mathbf{y}_{t}=\Phi_{1}\mathbf{y}_{t-1}+\Phi_{2}\mathbf{y}_{t-2}+\Phi_{3}\mathbf{y}_{t-3}+\varepsilon_{t}\label{eq: 3 var, 3 lag example}
+\mathbf{y}_{t}=\Phi_{1}\mathbf{y}_{t-1}+\Phi_{2}\mathbf{y}_{t-2}+\Phi_{3}\mathbf{y}_{t-3}+\varepsilon_{t}\label{3 var, 3 lag example}
 \end{equation}
 
 \end_inset
@@ -271,7 +267,7 @@ This model despite its seeming simplicity is not simple, and can be seen
  if we expand the notation in 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq: 3 var, 3 lag example"
+reference "3 var, 3 lag example"
 
 \end_inset
 
@@ -290,12 +286,12 @@ reference "eq: 3 var, 3 lag example"
 \phi_{1,1,2} & \phi_{1,2,2} & \phi_{1,3,2}\\
 \phi_{2,1,2} & \phi_{2,2,2} & \phi_{2,3,2}\\
 \phi_{3,1,2} & \phi_{3,2,2} & \phi_{3,3,2}
-\end{array}\right]\mathbf{y}_{t-2}\notag\nonumber \\
+\end{array}\right]\mathbf{y}_{t-2}\nonumber \\
  &  & +\left[\begin{array}{ccc}
 \phi_{1,1,3} & \phi_{1,2,3} & \phi_{1,3,3}\\
 \phi_{2,1,3} & \phi_{2,2,3} & \phi_{2,3,3}\\
 \phi_{3,1,3} & \phi_{3,2,3} & \phi_{3,3,3}
-\end{array}\right]\mathbf{y}_{t-3}+\varepsilon_{t}.\label{eq: 3 var, 3 lag expanded}
+\end{array}\right]\mathbf{y}_{t-3}+\varepsilon_{t}.\label{3 var, 3 lag expanded}
 \end{eqnarray}
 
 \end_inset
@@ -307,7 +303,7 @@ reference "eq: 3 var, 3 lag example"
 Clearly 
 \begin_inset CommandInset ref
 LatexCommand eqref
-reference "eq: 3 var, 3 lag expanded"
+reference "3 var, 3 lag expanded"
 
 \end_inset
 
@@ -383,28 +379,18 @@ In the previous section, the example of a seemingly simple VAR
 \begin_inset Quotes grd
 \end_inset
 
-simple”
-\begin_inset space \space{}
-\end_inset
-
-task would take over 
+simple” task would take over 
 \begin_inset Formula $2$
 \end_inset
 
  years to complete.
-\begin_inset space \space{}
-\end_inset
-
-All possible subsets is the only way to guarantee the best model among competing
- models, but there are other possibilities for subsetting.
+ All possible subsets is the only way to guarantee the best model among
+ competing models, but there are other possibilities for subsetting.
  Unfortunately, traditional procedures such as stepwise selection do not
  tend to perform well.
  This leads to the motivation for the use of an improved search algorithm
  which comes in the form of the genetic algorithm (GA).
-\begin_inset space \space{}
-\end_inset
-
-The GA provides a means to search the possible subsets and obtain a new
+ The GA provides a means to search the possible subsets and obtain a new
  optimal model in terms of the information criteria.
 \end_layout
 

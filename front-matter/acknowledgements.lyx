@@ -2,8 +2,16 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass article
+\textclass utthesis
+\options dissertation,letterpaper,12pt
 \use_default_options true
+\master ../Dissertation.lyx
+\begin_modules
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+knitr
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -25,6 +33,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
 \use_geometry false
@@ -32,7 +41,7 @@
 \use_esint 1
 \use_mhchem 1
 \use_mathdots 1
-\cite_engine basic
+\cite_engine natbib_authoryear
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -59,8 +68,35 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Chapter*
+Acknowledgements
+\end_layout
 
+\begin_layout Standard
+I want to thank everyone who helped me along the path to this dissertation.
+ I want to first thank Dr.
+ Hamparsum Bozdogan for all the help and guidance he has provided.
+ I want to also thank my committee members, ...
+ for their guidance and direction.
+ I want to thank Dr.
+ Seaver for pushing me to see the big picture and ask those important questions.
+\end_layout
+
+\begin_layout Standard
+I want to thank Revolution Analytics for dealing with me as I finished this
+ dissertation.
+\end_layout
+
+\begin_layout Standard
+I want to thank my friends and family for their unending support and prayer.
+ Especially Andy, Greg, and Kane, who always asked ``how's it going'' to
+ keep me on track.
+ I want to thank my lovely wife for pushing me when I said I didn't want
+ to be pushed.
+\end_layout
+
+\begin_layout Standard
+Finally, I want to thank God because without him none of this would be possible.
 \end_layout
 
 \end_body

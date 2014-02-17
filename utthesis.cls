@@ -330,7 +330,7 @@
 \newcommand {\addToTOC}[1] {
 	\cleardoublepage
 	\phantomsection
-	\addcontentsline{toc}{chapter}{#1}
+	\addcontentsline{toc}{part}{#1}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % addToPDFBookmarks: macro that adds a bookmark to the PDF file
